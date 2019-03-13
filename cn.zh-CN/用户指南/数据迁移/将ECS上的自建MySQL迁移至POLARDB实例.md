@@ -20,6 +20,8 @@
 3.  单击数据迁移页面右侧的**创建迁移任务**。
 4.  配置迁移任务的**源库及目标库**信息。
 
+    ![源库及目标库配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/155244849340701_zh-CN.png)
+
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
     |任务名称|-|     -   DTS为每个任务自动生成一个任务名称，任务名称没有唯一性要求。
@@ -47,7 +49,7 @@
 
 6.  选择**迁移对象**和**迁移类型**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/155244827534280_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/155244849334280_zh-CN.png)
 
     |配置项目|配置说明|
     |:---|:---|
@@ -57,7 +59,7 @@
 
     -   如果需要进行不停机迁移，那么迁移类型选择**结构迁移**、**全量数据迁移**和**增量数据迁移**。
  |
-    |迁移对象|     -   在**迁移对象**框中将想要迁移的数据库选中，单击![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/155244827640698_zh-CN.png)移动到**已选择对象**框。
+    |迁移对象|     -   在**迁移对象**框中将想要迁移的数据库选中，单击![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/155244849340698_zh-CN.png)移动到**已选择对象**框。
     -   迁移对象的选择粒度细化为：库、表、列三个粒度。
     -   默认情况下，对象迁移到目标POLARDB实例后，对象名跟源ECS上的自建数据库一致。如果您迁移的对象在源实例跟目标实例上名称不同，那么需要使用DTS提供的对象名映射功能，详细使用方式可以参考[库表列映射](https://help.aliyun.com/document_detail/26628.html?spm=5176.doc26624.6.125.Mpn8On)。
  |
@@ -67,7 +69,7 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/86903/155244827635996_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/86903/155244849335996_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
 8.  预检查通过后，单击**下一步**。
 9.  在**购买配置确认**页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 10. 单击**购买并启动**，迁移任务正式开始。
