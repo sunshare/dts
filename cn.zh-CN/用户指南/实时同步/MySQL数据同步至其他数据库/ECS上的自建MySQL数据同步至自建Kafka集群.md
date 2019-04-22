@@ -29,7 +29,7 @@ DML操作：Insert、Update、Delete、Replace。
 
 ## 消息格式 {#section_y13_zp2_zgb .section}
 
-同步到Kafka集群中的数据以avro格式存储，schema定义详情请参考[DTS avro schema定义](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/109395/cn_zh/1551753082237/DTS%20avro%20schema%E5%AE%9A%E4%B9%89.pdf)。
+同步到Kafka集群中的数据以avro格式存储，schema定义详情请参考[DTS avro schema定义](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/109277/cn_zh/1555667901868/DTS_Message_Schema.avsc)。
 
 在数据同步到Kafka集群后，您需要根据avro schema定义进行数据解析。
 
@@ -112,7 +112,7 @@ DML操作：Insert、Update、Delete、Replace。
 3.  在页面右上角，单击**创建同步作业**。
 4.  购买数据同步实例，参数说明如下表所示。
 
-    ![购买数据同步实例](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/155410463939866_zh-CN.png)
+    ![购买数据同步实例](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/155589715439866_zh-CN.png)
 
     |参数配置区|参数项|说明|
     |:----|:--|:-|
@@ -120,9 +120,9 @@ DML操作：Insert、Update、Delete、Replace。
     |源实例|选择**MySQL**。|
     |源实例地域|选择数据同步链路中作为数据源的ECS实例所属地域。|
     |目标实例|选择**Kafka**。|
-    |目标实例地域|选择数据同步链路中目标Kafka集群的地域。**说明：** 订购后不支持更换地域，请谨慎选择。
+    |目标实例地域|选择数据同步链路中目标Kafka集群的地域。 **说明：** 订购后不支持更换地域，请谨慎选择。
 
-|
+ |
     |同步拓扑|数据同步支持的拓扑类型，MySQL同步至Kafka仅支持单向同步。|
     |网络类型|数据同步服务使用的网络类型，目前仅支持专线。|
     |同步链路规格|数据传输为您提供了不同性能的链路规格，以同步的记录数为衡量标准。详情请参考[数据同步规格说明](https://help.aliyun.com/document_detail/26605.html)。|
@@ -137,7 +137,7 @@ DML操作：Insert、Update、Delete、Replace。
 3.  定位至已购买的数据同步实例，单击**配置同步链路**。
 4.  配置同步通道的源实例及目标实例信息。
 
-    ![同步通道的源和目标实例配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134857/155410463939929_zh-CN.png)
+    ![同步通道的源和目标实例配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134857/155589715439929_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -171,7 +171,7 @@ DML操作：Insert、Update、Delete、Replace。
 5.  单击页面右下角的**授权白名单并进入下一步**。
 6.  配置同步对象信息。
 
-    ![配置同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/155410463939868_zh-CN.png)
+    ![配置同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/155589715439868_zh-CN.png)
 
     **说明：** 
 
@@ -181,7 +181,7 @@ DML操作：Insert、Update、Delete、Replace。
 7.  上述配置完成后单击页面右下角的**下一步**。
 8.  配置同步初始化的高级配置信息。
 
-    ![配置同步初始化](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/155410463939869_zh-CN.png)
+    ![配置同步初始化](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/155589715439869_zh-CN.png)
 
     **说明：** 
 
@@ -192,11 +192,11 @@ DML操作：Insert、Update、Delete、Replace。
     **说明：** 
 
     -   在数据同步任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步任务。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/155410463939870_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/155589715439870_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
 10. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框，数据同步任务正式开始。
 
     您可以在数据同步页面，查看数据同步状态。
 
-    ![查看数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/155410463939871_zh-CN.png)
+    ![查看数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/155589715439871_zh-CN.png)
 
 
