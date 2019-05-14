@@ -23,7 +23,8 @@ RENAME TABLE、TRUNCATE TABLE
 
 ## 注意事项 {#section_dtz_3ny_bgb .section}
 
-全量初始化过程中，并发Insert导致目标实例的表碎片，全量初始化完成后，目标实例的表空间比源集群的表空间大。
+-   全量初始化过程中，并发Insert导致目标实例的表碎片，全量初始化完成后，目标实例的表空间比源集群的表空间大。
+-   如果数据同步的源实例没有主键或唯一约束，且记录的全字段没有唯一性，可能会出现重复数据。
 
 ## 同步限制 {#section_tf3_kny_bgb .section}
 
@@ -44,21 +45,21 @@ alter table tbl_name rename to new_tbl_n;ame
 
 1.  **A** \> **B**即要求实例 B 中同步的对象必须为只读，否则会导致同步链路异常，出现数据不一致的情况。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376397934086_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017034086_zh-CN.png)
 
 2.  **A** \> **B/C/D**即一对多的分发式同步架构,这个架构对RDS实例个数没有限制，但是要求目标实例中的同步对象必须为只读，否则会导致同步链路异常，出现数据不一致的情况。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376397934087_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017034087_zh-CN.png)
 
 3.  **B/C/D** \> **A**即多对一的数据汇总架构。对于这种多对一的同步架构，为了保证同步数据一致性，要求每条同步链路同步的对象不相同。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398034088_zh-CN.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017034088_zh-CN.jpg)
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398034089_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017034089_zh-CN.png)
 
 4.  **A** \> **B** \> **A**即集群A和实例B之间的双向同步架构。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398034090_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017034090_zh-CN.png)
 
     **说明：** 
 
@@ -86,7 +87,7 @@ alter table tbl_name rename to new_tbl_n;ame
 
 -   在配置同步作业前，要确保同步作业的源POLARDB集群及目标RDS实例都已经存在。如果不存在，那么请先[购买RDS实例](https://rds-buy.aliyun.com/rdsBuy)或[购买POLARDB集群](https://common-buy.aliyun.com/)。
 -   在配置同步作业前，需要先将POLARDB集群所在区域的DTS IP段添加到POLARDB集群的白名单中。各区域DTS IP段参考[DTS IP段](https://help.aliyun.com/document_detail/84900.html)。
--   开启源库的binlog，如果未开启，您可以[提交工单](https://selfservice.console.aliyun.com/ticket/createIndex)进行申请。
+-   开启源库的Binlog，请参见[如何开启Binlog](../../../../cn.zh-CN/POLARDB for MySQL用户指南/如何开启Binlog.md#)。
 
 ## 配置步骤 {#section_g3l_jxy_bgb .section}
 
@@ -99,79 +100,47 @@ alter table tbl_name rename to new_tbl_n;ame
 
     在购买页面需要配置的参数包括：
 
-    -   源实例
+    |参数|说明|
+    |--|--|
+    |功能|此处选择**数据同步**。|
+    |源实例|源实例目前支持MySQL、DRDS，此处选择**MySQL**，需要将POLARDB当作通过专线接入的自建MySQL来配置。|
+    |源实例地域|选择源RDS实例所在地域。|
+    |目标实例|目标实例支持MySQL、MaxCompute、Datahub、分析型数据库AnalyticDB、Elasticsearch。此处选择**MySQL**。|
+    |目标实例地域|此处选择POLARDB集群所在的地域。|
+    |同步拓扑|对于POLARDB与RDS之间的同步拓扑支持：单向同步及双向同步。此处选择**单向同步**。|
+    |网络类型|为跨地域传输数据使用的网络模式，目前只支持专线模式，DTS提供专线，您无需单独购买高速通道。|
+    |同步链路规格|实例规格影响了链路的同步性能，实例规格跟性能之间的对应关系详见 [数据同步规格说明](https://help.aliyun.com/document_detail/26605.html)。|
+    |数量|数量为一次性购买的同步链路的数量，如果购买的是按量付费实例，一次最多购买99条链路。|
 
-        源实例目前支持MySQL、DRDS，此处选择MySQL，需要将POLARDB当作通过专线接入的自建MySQL来配置。
 
-    -   源实例区域
-
-        源地域选择源RDS实例所在地域。
-
-    -   目标实例
-
-        目标实例支持MySQL、MaxCompute、Datahub、分析型数据库AnalyticDB、Elasticsearch。此处选择MySQL。
-
-        目标地域为同步链路目标实例所在地域。
-
-    -   目标实例地域
-
-        此处选择POLARDB集群所在的区域。
-
-    -   同步拓扑
-
-        对于POLARDB与RDS之间的同步拓扑支持：单向同步及双向同步。此处选择单向同步。
-
-    -   同步链路规格
-
-        实例规格影响了链路的同步性能，实例规格跟性能之间的对应关系详见 [数据同步规格说明](https://help.aliyun.com/document_detail/26605.html)。
-
-    -   数量
-
-        数量为一次性购买的同步链路的数量，如果购买的是按量付费实例，一次最多购买 99 条链路。
-
-        当购买完同步实例，返回数据传输控制台，单击新购链路右侧的“配置同步作业” 开始链路配置。
-
+当购买完同步实例，返回数据传输控制台，单击新购链路右侧的**配置同步链路**开始链路配置。
 
 **同步链路连接信息配置**
 
-当购买完实例后，开始进行同步实例配置，第一步主要进行同步实例名称及数据源连接信息的配置。具体配置内容如下：
+当购买完实例后，开始进行同步链路配置，第一步主要进行同步实例名称及数据源连接信息的配置。具体配置内容如下：
 
-1.  同步实例名称
+|类别|参数|说明|
+|--|--|--|
+|-|同步作业名称|同步实例名称没有唯一性要求，主要为了更方便识别具体的作业，建议选择一个有业务意义的作业名称，方便后续的链路查找及管理。|
+|源实例信息|实例类型|选择**通过专线/VPN网关/智能网关接入的自建数据库**。|
+|对端专有网络|此处配置POLARDB的VPC ID。具体VPC ID可以到POLARDB控制台的基本信息界面获取。 **说明：** 选择VPC即可，无需为该VPC配置VPN网关。
 
-    同步实例名称没有唯一性要求，主要为了更方便识别具体的作业，建议选择一个有业务意义的作业名称，方便后续的链路查找及管理。
+ ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017034091_zh-CN.png)
 
-2.  源实例连接信息
-    -   实例类型：选择通过专线接入的本地DB。
-    -   对端专有网络：此处配置POLARDB的VPC ID。具体VPC ID可以到POLARDB控制台的基本信息界面获取。
+|
+|IP地址|配置POLARDB主实例的私网IP地址。在ECS中ping该POLARDB集群的**主地址（私网）**可以获取该IP地址。 **说明：** 填写IP地址而不是域名，例如应该填写192.168.xx.xx，而不是pc-xxxxx.mysql.polardb.rds.aliyuncs.com。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398034091_zh-CN.png)
+ |
+|端口|配置POLARDB集群的监听端口，默认为3306。|
+|数据库账号|配置POLARDB的访问账号。|
+|数据库密码|配置POLARDB上面账号对应的数据库密码。|
+|目标实例信息|实例类型|选择**RDS实例**。|
+|实例ID|配置源RDS实例的实例ID。|
+|连接方式|对于RDS实例，支持非加密连接和SSL安全连接两种方式。可以根据需要选择连接方式。如果要选择SSL安全连接，那必须先打开RDS的加密连接，开启方法参考[用户指南](https://help.aliyun.com/document_detail/32474.html)。|
 
-    -   IP地址：配置POLARDB主实例的私网IP地址。在ECS中ping该POLARDB集群的**主地址（私网）**可以获取该IP地址。
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017034092_zh-CN.png)
 
-        **说明：** 填写IP地址而不是域名，例如应该填写192.168.xx.xx，而不是pc-xxxxx.mysql.polardb.rds.aliyuncs.com。
-
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398035784_zh-CN.png)
-
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398035785_zh-CN.png)
-
-    -   端口：配置POLARDB集群的监听端口，默认为3306。
-
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398035786_zh-CN.png)
-
-    -   数据库账号：配置POLARDB的访问账号。
-    -   数据库密码：配置POLARDB上面账号对应的数据库密码。
-3.  目标实例连接信息
-
-    -   实例类型：选择RDS实例。
-    -   实例 ID：配置源RDS实例的实例ID。
-    -   连接方式：
-
-        -   对于RDS实例，支持非加密连接和SSL安全连接两种方式。可以根据需要选择连接方式。如果要选择SSL安全连接，那必须先打开RDS的加密连接，开启方法参考[用户指南](https://help.aliyun.com/document_detail/32474.html)。
-
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398034092_zh-CN.png)
-
-    当这些内容配置完成后，可以单击**授权白名单并进入下一步**。
-
+当这些内容配置完成后，可以单击**授权白名单并进入下一步**。
 
 **授权实例白名单**。
 
@@ -189,7 +158,7 @@ alter table tbl_name rename to new_tbl_n;ame
 
 如果选择的某张表，那么只有这个表的 drop/alter/truncate/rename table，create/drop index 的操作会同步到目标库。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398034094_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017034094_zh-CN.png)
 
 当配置完同步对象后，进入同步初始化配置。
 
@@ -199,7 +168,7 @@ alter table tbl_name rename to new_tbl_n;ame
 
 同步初始化类型细分为：结构初始化，全量数据初始化。默认情况下，需要选择结构初始化及全量初始化。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398034095_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017034095_zh-CN.png)
 
 **预检查**
 
@@ -207,9 +176,9 @@ alter table tbl_name rename to new_tbl_n;ame
 
 如果预检查失败，那么可以单击具体检查项后的按钮，查看具体的失败详情，并根据失败原因修复后，重新进行预检查。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398134357_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017034357_zh-CN.png)
 
-**说明：** 如果预检查失败，提示源库需要开启binlog，您可以[提交工单](https://selfservice.console.aliyun.com/ticket/createIndex)进行申请。
+**说明：** 如果预检查失败，提示源库需要开启binlog，请参见[如何开启Binlog](../../../../cn.zh-CN/POLARDB for MySQL用户指南/如何开启Binlog.md#)。
 
 当同步作业配置完成后，数据传输服务会进行限制预检查，当预检查通过后，DTS直接启动同步作业。
 
@@ -219,10 +188,10 @@ alter table tbl_name rename to new_tbl_n;ame
 
 -   如果单击**授权白名单并进入下一步**后，提示**当前请求失败，建议您刷新页面或稍后重试**，请检查POLARDB实例地址，该地址为IP地址，例如192.168.xx.xx，而不是域名地址。在ECS实例中ping该POLARDB集群的**主地址（私网）**可以获取该IP地址。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398141928_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017041928_zh-CN.png)
 
--   如果预检查失败，提示**源库binlog开启检查**失败，您可以[提交工单](https://selfservice.console.aliyun.com/ticket/createIndex)进行申请。
+-   如果预检查失败，提示**源库binlog开启检查**失败，请参见[如何开启Binlog](../../../../cn.zh-CN/POLARDB for MySQL用户指南/如何开启Binlog.md#)。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376398141938_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780017041938_zh-CN.png)
 
 
