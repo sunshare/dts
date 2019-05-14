@@ -82,7 +82,7 @@
 3.  定位至已购买的数据同步实例，单击**配置同步链路**。
 4.  配置同步通道的源实例及目标实例信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/155745897946871_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/155780020046871_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -93,13 +93,13 @@
     |实例地区|购买数据同步实例时选择的源POLARDB实例的地域信息，不可变更。|
     |对端专有网络|选择POLARDB实例所属的VPC ID。 **说明：** 您可以通过POLARDB控制台的基本信息页面获取VPCID。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/155745897946873_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/155780020046873_zh-CN.png)
 
  |
     |数据库类型|固定为**MySQL**，不可变更。|
     |IP地址|填入POLARDB实例的私网IP地址。 **说明：** 您可以在ECS或本地设备中，通过ping该POLARDB集群的**主地址（私网）**获取IP地址。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/155745897946870_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/155780020046870_zh-CN.png)
 
  |
     |端口|填入POLARDB实例的监听端口，默认为3306。|
@@ -117,7 +117,7 @@
 5.  单击页面右下角的**授权白名单并进入下一步**。
 6.  配置同步策略及对象信息。
 
-    ![配置同步策略和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/155745897946872_zh-CN.png)
+    ![配置同步策略和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/155780020046872_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -155,12 +155,12 @@
     **说明：** 
 
     -   在数据同步任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步任务。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/155745897945708_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/155780020045708_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
 8.  在预检查对话框中显示**预检查通过**后，关闭预检查对话框，该同步作业的同步任务正式开始。
 9.  等待该同步作业的链路初始化完成，直至状态处于**同步中**。
 
     您可以在 数据同步页面，查看数据同步状态。
 
-    ![数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/155745897946874_zh-CN.png)
+    ![数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/155780020046874_zh-CN.png)
 
 
