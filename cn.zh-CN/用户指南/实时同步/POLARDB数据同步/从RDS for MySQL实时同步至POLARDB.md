@@ -23,7 +23,8 @@ RENAME TABLE、TRUNCATE TABLE
 
 ## 注意事项 {#section_dtz_3ny_bgb .section}
 
-全量初始化过程中，并发insert导致目标集群的表碎片，全量初始化完成后，目标集群的表空间比源实例的表空间大。
+-   全量初始化过程中，并发insert导致目标集群的表碎片，全量初始化完成后，目标集群的表空间比源实例的表空间大。
+-   如果数据同步的源实例没有主键或唯一约束，且记录的全字段没有唯一性，可能会出现重复数据。
 
 ## 同步限制 {#section_tf3_kny_bgb .section}
 
@@ -37,21 +38,21 @@ RENAME TABLE、TRUNCATE TABLE
 
 1.  **A** \> **B**即要求实例 B 中同步的对象必须为只读，否则会导致同步链路异常，出现数据不一致的情况。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376396934086_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780013734086_zh-CN.png)
 
 2.  **A** \> **B/C/D** 即一对多的分发式同步架构,这个架构对POLARDB节点个数没有限制，但是要求目标集群中的同步对象必须为只读，否则会导致同步链路异常，出现数据不一致的情况。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376396934087_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780013734087_zh-CN.png)
 
 3.  **B/C/D** \> **A**即多对一的数据汇总架构。对于这种多对一的同步架构，为了保证同步数据一致性，要求每条同步链路同步的对象不相同。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376396934088_zh-CN.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780013734088_zh-CN.jpg)
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376396934089_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780013734089_zh-CN.png)
 
 4.  **A** \> **B** \> **A**即实例A和集群B之间的双向同步架构。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376396934090_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780013834090_zh-CN.png)
 
     **说明：** 
 
@@ -141,21 +142,21 @@ RENAME TABLE、TRUNCATE TABLE
     -   实例类型：此处选择通过专线接入的本地DB。
     -   对端专有网络：此处配置POLARDB的VPC ID。具体VPC ID可以到POLARDB控制台的**基本信息**界面获取。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376396934091_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780013834091_zh-CN.png)
 
     -   IP地址：配置POLARDB主实例的私网IP地址。在ECS中ping该POLARDB集群的**主地址（私网）**可以获取该IP地址。
 
         **说明：** 填写IP地址而不是域名，例如应该填写192.168.xx.xx，而不是pc-xxxxx.mysql.polardb.rds.aliyuncs.com。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376396935784_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780013835784_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376396935785_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780014735785_zh-CN.png)
 
     -   端口：配置POLARDB的监听端口。
     -   数据库账号：配置POLARDB的访问账号。
     -   数据库密码：配置POLARDB上面账号对应的数据库密码。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79404/155376396934104_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79404/155780014734104_zh-CN.png)
 
     当这些内容配置完成后，可以单击**授权白名单并进入下一步**。
 
@@ -176,7 +177,7 @@ RENAME TABLE、TRUNCATE TABLE
 
 如果选择的某张表，那么只有这个表的 drop/alter/truncate/rename table，create/drop index 的操作会同步到目标库。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376396934094_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780014734094_zh-CN.png)
 
 当配置完同步对象后，进入同步初始化配置。
 
@@ -186,7 +187,7 @@ RENAME TABLE、TRUNCATE TABLE
 
 同步初始化类型细分为：结构初始化，全量数据初始化。默认情况下，需要选择结构初始化及全量初始化。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376397034095_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780014834095_zh-CN.png)
 
 **预检查**
 
@@ -200,5 +201,5 @@ RENAME TABLE、TRUNCATE TABLE
 
 如果单击**授权白名单并进入下一步**后，提示**当前请求失败，建议您刷新页面或稍后重试**，请检查POLARDB实例地址，该地址为IP地址，例如192.168.xx.xx，而不是域名地址。在ECS实例中ping该POLARDB集群的**主地址（私网）**可以获取该IP地址。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155376397041928_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/155780014841928_zh-CN.png)
 
