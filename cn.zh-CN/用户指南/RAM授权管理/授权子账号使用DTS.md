@@ -25,11 +25,11 @@ DTS支持的授权策略为读写策略和只读策略。
 2.  在RAM控制台的左侧导航栏，单击**人员管理** \> **用户**。
 3.  定位至创建的RAM用户，在**操作**列单击**添加权限**。
 
-    ![添加授权](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/155789684745025_zh-CN.png)
+    ![添加授权](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/155831818645025_zh-CN.png)
 
 4.  在添加权限对话框中，配置授权信息。
 
-    ![配置授权信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/155789684745026_zh-CN.png)
+    ![配置授权信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/155831818645026_zh-CN.png)
 
     1.  选择权限为**系统权限策略**。
     2.  在搜索框中输入dts，展现DTS相关的系统权限策略。
