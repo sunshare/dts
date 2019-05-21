@@ -1,6 +1,6 @@
 # 授权子账号使用数据订阅SDK {#concept_265351 .concept}
 
-数据传输服务（Data TransmissionService，简称DTS）支持阿里云RAM主子账号体系。您可以使用子账号进行任务的创建和管理，也可以使用子账号的AccessKey和AccessKeySecret进行数据的实时订阅。
+数据传输服务（Data Transmission Service，简称DTS）支持阿里云RAM主子账号体系。您可以使用子账号进行任务的创建和管理，也可以使用子账号的AccessKey和AccessKeySecret进行数据的实时订阅。
 
 ## 策略说明 {#section_c4r_m3g_thb .section}
 
@@ -24,11 +24,11 @@ DTS支持的授权策略为读写策略和只读策略。
 2.  在RAM控制台的左侧导航栏，单击**人员管理** \> **用户**。
 3.  定位至创建的RAM用户，在**操作**列单击**添加权限**。
 
-    ![添加授权](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/155840798045025_zh-CN.png)
+    ![添加授权](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/155840947145025_zh-CN.png)
 
 4.  在添加权限对话框中，配置授权信息。
 
-    ![配置授权信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/155840798045026_zh-CN.png)
+    ![配置授权信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/155840947145026_zh-CN.png)
 
     1.  选择权限为**系统权限策略**。
     2.  在搜索框中输入dts，展现DTS相关的系统权限策略。
