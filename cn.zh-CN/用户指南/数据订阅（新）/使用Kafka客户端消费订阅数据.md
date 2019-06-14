@@ -93,7 +93,7 @@
 4.  定位目标数据订阅通道，单击该订阅ID。
 5.  在订阅配置页面，您将获取到**订阅Topic**和**网络**信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156047479748804_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156047501448804_zh-CN.png)
 
     **说明：** 
 
@@ -101,40 +101,8 @@
     -   如果您部署Kafka Client的ECS实例与数据订阅通道属于同一经典网络或同一专有网络，建议通过内网地址进行数据订阅，网络延迟最小。
 6.  在左侧导航栏，单击**数据消费**，您将获取到**消费组ID**和对应的**账号**信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156047479748805_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156047501448805_zh-CN.png)
 
     **说明：** 如果忘记消费组密码，您可以[修改消费组密码](cn.zh-CN/用户指南/数据订阅（新）/管理消费组.md#section_isf_puz_17u)。
 
-
--   MYSQL\_TYPE\_DECIMAL：0
--   MYSQL\_TYPE\_INT8：1
--   MYSQL\_TYPE\_INT16：2
--   MYSQL\_TYPE\_INT32：3
--   MYSQL\_TYPE\_FLOAT：4
--   MYSQL\_TYPE\_DOUBLE：5
--   MYSQL\_TYPE\_NULL：6
--   MYSQL\_TYPE\_TIMESTAMP：7
--   MYSQL\_TYPE\_INT64：8
--   MYSQL\_TYPE\_INT24：9
--   MYSQL\_TYPE\_DATE：10
--   MYSQL\_TYPE\_TIME：11
--   MYSQL\_TYPE\_DATETIME：12
--   MYSQL\_TYPE\_YEAR：13
--   MYSQL\_TYPE\_DATE\_NEW：14
--   MYSQL\_TYPE\_VARCHAR：15
--   MYSQL\_TYPE\_BIT：16
--   MYSQL\_TYPE\_TIMESTAMP\_NEW：17
--   MYSQL\_TYPE\_DATETIME\_NEW：18
--   MYSQL\_TYPE\_TIME\_NEW：19
--   MYSQL\_TYPE\_JSON：245
--   MYSQL\_TYPE\_DECIMAL\_NEW：246
--   MYSQL\_TYPE\_ENUM：247
--   MYSQL\_TYPE\_SET：248
--   MYSQL\_TYPE\_TINY\_BLOB：249
--   MYSQL\_TYPE\_MEDIUM\_BLOB：250
--   MYSQL\_TYPE\_LONG\_BLOB：251
--   MYSQL\_TYPE\_BLOB：252
--   MYSQL\_TYPE\_VAR\_STRING：253
--   MYSQL\_TYPE\_STRING：254
--   MYSQL\_TYPE\_GEOMETRY：255
 
