@@ -11,9 +11,12 @@
 
 请下载[Kafka客户端Demo代码](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/109395/cn_zh/1560419787994/subscribe_demo.tar)。
 
+## 订阅通道数据格式介绍 {#section_mcu_0ca_nmc .section}
+
+数据以Avro序列化存储，详细格式请参见Kafka客户端Demo代码中的Record.avsc文件，该文件的路径为subscribe\_demo/src/main/resources/。订阅到数据后，您需要根据avro schema定义进行数据解析。
+
 ## Kafka客户端Demo代码说明 {#section_t4g_wpn_ta6 .section}
 
--   数据以Avro序列化存储，详细格式请参见Kafka客户端Demo代码中的Record.avsc文件，该文件的路径为subscribe\_demo/src/main/resources/。
 -   代码中参数设置项。
 
     **说明：** 您可以通过DTS控制台获取以下参数的取值，详情请参见[获取数据订阅所需信息](#section_oud_5wv_dmf)。
@@ -62,7 +65,7 @@
 4.  定位目标数据订阅通道，单击该订阅ID。
 5.  在订阅配置页面，您将获取到**订阅Topic**和**网络**信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156047863948804_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156083997548804_zh-CN.png)
 
     **说明：** 
 
@@ -70,7 +73,7 @@
     -   如果您部署Kafka Client的ECS实例与数据订阅通道属于同一经典网络或同一专有网络，建议通过内网地址进行数据订阅，网络延迟最小。
 6.  在左侧导航栏，单击**数据消费**，您将获取到**消费组ID**和对应的**账号**信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156047863948805_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156083997548805_zh-CN.png)
 
     **说明：** 如果忘记消费组密码，您可以[修改消费组密码](cn.zh-CN/用户指南/数据订阅（新）/管理消费组.md#section_isf_puz_17u)。
 
