@@ -17,8 +17,8 @@
 
 ## 数据订阅 {#section_zvr_twq_d3b .section}
 
-|API接口|描述|
-|:----|:-|
+|API|描述|
+|:--|:-|
 |[CreateSubscriptionInstance](https://help.aliyun.com/document_detail/49436.html)|购买订阅实例|
 |[ConfigureSubscriptionInstance](https://help.aliyun.com/document_detail/49437.html)|配置订阅通道|
 |[StartSubscriptionInstance](https://help.aliyun.com/document_detail/49438.html)|启动订阅通道|
@@ -34,8 +34,8 @@
 
 ## 数据同步 {#section_s4k_swq_d3b .section}
 
-|API接口|描述|
-|:----|:-|
+|API|描述|
+|:--|:-|
 |[CreateSynchronizationJob](https://help.aliyun.com/document_detail/49446.html)|购买同步实例|
 |[ConfigureSynchronizationJob](https://help.aliyun.com/document_detail/49447.html)|配置同步作业|
 |[StartSynchronizationJob](https://help.aliyun.com/document_detail/49448.html)|启动同步作业|
