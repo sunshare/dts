@@ -4,7 +4,7 @@
 
 ## 源库支持的实例类型 {#section_cgg_tqg_eir .section}
 
-进行数据迁移操作的Oracle数据库支持以下实例类型。
+进行数据迁移操作的Oracle数据库支持以下实例类型：
 
 -   有公网IP的自建数据库
 -   ECS上的自建数据库
@@ -49,6 +49,8 @@
 -   全量数据迁移
 
     DTS会将本地Oracle数据库迁移对象的存量数据，全部迁移到目标RDS for MySQL实例数据库中 。
+
+    **说明：** 为保障数据一致性，全量数据迁移期间请勿在自建Oracle数据库中写入新的数据。
 
 -   增量数据迁移
 
@@ -121,12 +123,12 @@
 2.  在左侧导航栏，单击**数据迁移**。
 3.  在迁移任务列表页面顶部，选择迁移的目标实例所属地域。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156282560950439_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156283111650439_zh-CN.png)
 
 4.  单击页面右上角的**创建迁移任务**。
 5.  配置迁移任务的源库及目标库信息。
 
-    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156282560947598_zh-CN.png)
+    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156283111647598_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -161,7 +163,7 @@
 
 7.  选择迁移对象及迁移类型。
 
-    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156282560947602_zh-CN.png)
+    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156283111647602_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -171,7 +173,7 @@
 
     -   如果需要进行不停机迁移，同时勾选**结构迁移**、**全量数据迁移**和**增量数据迁移**。
  |
-    |迁移对象| 在迁移对象框中选中待迁移的对象，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156282560940698_zh-CN.png)将其移动到已选择对象框。
+    |迁移对象| 在迁移对象框中选中待迁移的对象，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156283111640698_zh-CN.png)将其移动到已选择对象框。
 
  **说明：** 
 
@@ -184,7 +186,7 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156282560947468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156283111647468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
 9.  预检查通过后，单击**下一步**。
 10. 在购买配置确认页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 11. 单击**购买并启动**，迁移任务正式开始。
@@ -201,7 +203,7 @@
         1.  观察迁移任务的进度变更为**增量迁移**，并显示为**无延迟**状态时，将源库停写几分钟，此时**增量迁移**的状态可能会显示延迟的时间。
         2.  等待迁移任务的**增量迁移**再次进入**无延迟**状态后，手动结束迁移任务。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156282561047604_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156283111647604_zh-CN.png)
 
 12. 将业务切换至RDS实例。
 
