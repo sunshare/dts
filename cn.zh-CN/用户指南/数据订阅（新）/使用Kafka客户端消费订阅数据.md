@@ -31,9 +31,7 @@
     |password|该消费组账号对应的的密码。 **说明：** 如果忘记消费组密码，您可以[修改消费组密码](cn.zh-CN/用户指南/数据订阅（新）/管理消费组.md#section_isf_puz_17u)。
 
  |
-    |startTimeStamp|您需要保存已消费的数据时间点。当业务程序中断后，您可以通过传入已消费的数据时间点来继续消费数据，防止数据丢失。 **说明：** 当订阅程序重启时，需要设置该参数的值。
-
- |
+    |startTimeStamp|您需要保存已消费的数据时间点。当业务程序中断后，您可以通过订阅客户端传入已消费的数据时间点来继续消费数据，防止数据丢失。同时您还可以在订阅客户端启动时，传入所需的消费位点，对订阅位点进行调整，实现按需消费数据。|
 
 -   关键代码。
     -   makeProps
@@ -65,7 +63,7 @@
 4.  定位目标数据订阅通道，单击该订阅ID。
 5.  在订阅配置页面，您将获取到**订阅Topic**和**网络**信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156092880048804_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156289717948804_zh-CN.png)
 
     **说明：** 
 
@@ -73,7 +71,7 @@
     -   如果您部署Kafka Client的ECS实例与数据订阅通道属于同一经典网络或同一专有网络，建议通过内网地址进行数据订阅，网络延迟最小。
 6.  在左侧导航栏，单击**数据消费**，您将获取到**消费组ID**和对应的**账号**信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156092880048805_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156289717948805_zh-CN.png)
 
     **说明：** 如果忘记消费组密码，您可以[修改消费组密码](cn.zh-CN/用户指南/数据订阅（新）/管理消费组.md#section_isf_puz_17u)。
 
