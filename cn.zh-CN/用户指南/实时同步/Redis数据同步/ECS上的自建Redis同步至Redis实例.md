@@ -17,7 +17,7 @@
 
 -   为保障同步链路稳定性，建议将配置文件redis.conf中`repl-backlog-size`参数的值适当调大。
 -   为保障同步质量，DTS会在源Redis数据库中插入一个key：**DTS\_REDIS\_TIMESTAMP\_HEARTBEAT**，用于记录更新时间点。
--   数据同步作业配置完成后，请勿变更源数据库或目标数据库的[架构类型](https://help.aliyun.com/document_detail/86132.html)，否则会导致数据同步失败。
+-   数据同步作业配置完成后，请勿变更源数据库或目标数据库的[架构类型](https://help.aliyun.com/document_detail/86132.html)（例如将主从架构变更为集群架构），否则会导致数据同步失败。
 
 ## 支持的数据源 {#section_hal_ntb_0ut .section}
 
@@ -86,15 +86,15 @@
 3.  在左侧导航栏，单击**数据同步**。
 4.  在同步作业列表页面的顶部，选择同步作业的目标实例所属地域。
 
-    ![选择同步作业所属地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156350657450604_zh-CN.png)
+    ![选择同步作业所属地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156351318150604_zh-CN.png)
 
 5.  定位至已购买的数据同步实例，单击**配置同步链路**。
 
-    ![配置Redis单向同步任务](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/190476/156350657446323_zh-CN.png)
+    ![配置Redis单向同步任务](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/190476/156351318246323_zh-CN.png)
 
 6.  配置数据同步的源实例及目标实例信息。
 
-    ![同步源目实例信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/190895/156350657446417_zh-CN.png)
+    ![同步源目实例信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/190895/156351318246417_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -125,7 +125,7 @@
 
 8.  配置目标已存在表的处理模式和同步对象。
 
-    ![配置处理模式和同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156350657550649_zh-CN.png)
+    ![配置处理模式和同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156351318250649_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -135,7 +135,7 @@
 **警告：** 选择为**无操作**后，在同步过程中如果遇到目标库中的Key与源库中的Key相同，会将源库的数据覆盖写入目标库中，请谨慎选择。
 
  |
-    |同步对象|     -   在源库对象框中单击待同步的数据库库名，然后单击![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156350657540698_zh-CN.png)移动到已选择对象框。
+    |同步对象|     -   在源库对象框中单击待同步的数据库库名，然后单击![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156351318240698_zh-CN.png)移动到已选择对象框。
     -   同步对象的选择粒度为库，暂不支持Key粒度的选择。
  |
 
@@ -144,19 +144,19 @@
 
     **说明：** DTS会将源Redis数据库中的存量数据同步至目标Redis数据库中，并同步增量数据。
 
-    ![Redis同步初始化](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156350657550606_zh-CN.png)
+    ![Redis同步初始化](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156351318250606_zh-CN.png)
 
 11. 上述配置完成后，单击页面右下角的**预检查并启动**。
 
     **说明：** 
 
     -   在数据同步任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156350657547468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156351318247468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
 12. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框。
 13. 等待同步作业的链路初始化完成，直至状态处于**同步中**。
 
     您可以在数据同步页面，查看数据同步状态。
 
-    ![同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/190895/156350657546419_zh-CN.png)
+    ![同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/190895/156351318346419_zh-CN.png)
 
 
