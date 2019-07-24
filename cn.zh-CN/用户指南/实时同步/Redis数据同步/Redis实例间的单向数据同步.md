@@ -6,12 +6,16 @@
 
 ## 前提条件 {#section_sk8_mha_ydf .section}
 
--   源Redis实例的版本为2.8或4.0版本。
+-   源Redis实例的版本为4.0版本。
 
     **说明：** 目标Redis实例支持的版本为2.8、4.0或5.0版本，如需跨版本同步请提前确认兼容性。
 
 -   目标Redis实例的存储空间需大于源Redis实例已使用的存储空间。
 -   进行数据同步之前或者正在进行同步时，
+
+## 注意事项 {#section_kv2_yik_y0x .section}
+
+源为云redis2.8时不支持增量同步，自建redis支持增量同步
 
 ## 支持的数据源 {#section_lh7_tma_1ub .section}
 
@@ -85,12 +89,12 @@
 3.  在左侧导航栏，单击**数据同步**。
 4.  在同步作业列表页面顶部，选择数据同步实例所属地域。
 
-    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156387113250604_zh-CN.png)
+    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156394622550604_zh-CN.png)
 
 5.  定位至已购买的数据同步实例，单击**配置同步链路**。
 6.  配置数据同步的源实例及目标实例信息。
 
-    ![源库和目标库信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156387113250605_zh-CN.png)
+    ![源库和目标库信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156394622650605_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -112,7 +116,7 @@
 
 8.  配置目标已存在表的处理模式和同步对象。
 
-    ![配置处理模式和同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156387113250649_zh-CN.png)
+    ![配置处理模式和同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156394622650649_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -122,7 +126,7 @@
 **警告：** 选择为**无操作**后，在同步过程中如果遇到目标库中的Key与源库中的Key相同，会将源库的数据覆盖写入目标库中，请谨慎选择。
 
  |
-    |同步对象|     -   在源库对象框中单击待同步的数据库，然后单击![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156387113240698_zh-CN.png)将其移动到已选择对象框。
+    |同步对象|     -   在源库对象框中单击待同步的数据库，然后单击![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156394622640698_zh-CN.png)将其移动到已选择对象框。
     -   同步对象的选择粒度为库，暂不支持Key粒度的选择。
  |
 
@@ -131,19 +135,19 @@
 
     **说明：** DTS会将源Redis数据库中的存量数据同步至目标Redis数据库中，并同步增量数据。
 
-    ![Redis同步初始化](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156387113350606_zh-CN.png)
+    ![Redis同步初始化](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156394622650606_zh-CN.png)
 
 11. 上述配置完成后，单击页面右下角的**预检查并启动**。
 
     **说明：** 
 
     -   在数据同步作业正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步作业。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156387113347468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156394622647468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
 12. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框，同步作业将正式开始。
 13. 等待该同步作业的链路初始化完成，直至处于**同步中**状态。
 
     您可以在 数据同步页面，查看数据同步作业的状态。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156387113341059_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156394622741059_zh-CN.png)
 
 
