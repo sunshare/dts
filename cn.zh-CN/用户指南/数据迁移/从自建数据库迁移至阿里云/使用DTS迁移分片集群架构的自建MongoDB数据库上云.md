@@ -8,15 +8,12 @@ DTS通过迁移分片集群中的每个Shard节点来实现分片集群数据库
 
 **说明：** 数据在目标MongoDB实例中的分布取决于您设置的片键，详情请参见[设置数据分片以充分利用Shard性能](../cn.zh-CN/最佳实践/设置数据分片以充分利用Shard性能.md#)。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80861/156290922950227_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80861/156447876850227_zh-CN.png)
 
 ## 前提条件 {#section_jx1_5wy_ngb .section}
 
 -   自建数据库中，各Shard节点的服务端口已开放至公网。
--   自建MongoDB数据库版本为3.0、3.2、3.4或3.6版本，暂不支持4.0版本。
-
-    **说明：** 4.0版本的自建MongoDB数据库上云请参见[使用MongoDB工具迁移自建数据库上云](cn.zh-CN/分片集群快速入门/数据迁移/使用MongoDB工具迁移自建数据库上云.md#)。
-
+-   自建MongoDB数据库版本为3.0、3.2、3.4、3.6或4.0版本。
 -   确保目标分片集群实例中的Shard节点具备充足的存储空间。
 
     **说明：** 例如自建数据库中有三个Shard节点，其中第二个Shard节点占用的存储空间最多（500GB），那么分片集群实例中的每个Shard节点的存储空间均需要大于500GB。
@@ -102,12 +99,12 @@ DTS通过迁移分片集群中的每个Shard节点来实现分片集群数据库
 2.  在左侧导航栏，单击**数据迁移**。
 3.  在迁移任务列表页面顶部，选择目标MongoDB实例所属地域。
 
-    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/6682/156290922950190_zh-CN.png)
+    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/6682/156447876850190_zh-CN.png)
 
 4.  单击右上角的**创建迁移任务**。
 5.  配置迁移任务的源库及目标库信息。
 
-    ![配置源库和目标库信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/6682/156290922934129_zh-CN.png)
+    ![配置源库和目标库信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/6682/156447876834129_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -143,7 +140,7 @@ DTS通过迁移分片集群中的每个Shard节点来实现分片集群数据库
 
 7.  选择**迁移对象**和**迁移类型**。
 
-    ![选择迁移对象和迁移类型](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80861/156290922934699_zh-CN.png)
+    ![选择迁移对象和迁移类型](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80861/156447876834699_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -153,7 +150,7 @@ DTS通过迁移分片集群中的每个Shard节点来实现分片集群数据库
 
     -   如果需要进行不停机迁移，则同时勾选**全量数据迁移**和**增量数据迁移**。
  |
-    |迁移对象|     -   在**迁移对象**框中单击待迁移的对象，然后单击![向右箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156290923040698_zh-CN.png)移动到**已选择对象**框。
+    |迁移对象|     -   在**迁移对象**框中单击待迁移的对象，然后单击![向右箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156447876840698_zh-CN.png)移动到**已选择对象**框。
 
 **说明：** 
 
@@ -168,7 +165,7 @@ DTS通过迁移分片集群中的每个Shard节点来实现分片集群数据库
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/140110/156290923050068_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/140110/156447876950068_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
 9.  预检查通过后，单击**下一步**。
 10. 在**购买配置确认**页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 11. 单击**购买并启动**，迁移任务正式开始。
@@ -187,7 +184,7 @@ DTS通过迁移分片集群中的每个Shard节点来实现分片集群数据库
         1.  等待所有Shard节点的迁移任务的进度变更为**增量迁移**，并显示为**无延迟**状态时，将源库停写几分钟，此时**增量迁移**的状态可能会显示延迟的时间。
         2.  等待所有Shard节点迁移任务的**增量迁移**再次进入**无延迟**状态后，手动结束迁移任务。
 
-            ![结束迁移任务](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80861/156290923034689_zh-CN.png)
+            ![结束迁移任务](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80861/156447876934689_zh-CN.png)
 
 14. 将业务切换至阿里云MongoDB实例。
 
