@@ -32,7 +32,7 @@ DTS的数据迁移功能支持同构或异构数据源之间的数据迁移，�
 |腾讯云MongoDB|[从腾讯云MongoDB增量迁移至阿里云](https://help.aliyun.com/document_detail/127839.html)|
 |[从腾讯云MongoDB全量迁移至阿里云](https://help.aliyun.com/document_detail/127840.html)|
 |阿里云实例间迁移|RDS实例|[RDS实例间的数据迁移](cn.zh-CN/用户指南/数据迁移/阿里云实例间迁移/RDS实例间的数据迁移.md#)|
-|RDS for MySQL实例|[将RDS MySQL迁移至POLARDB](cn.zh-CN/用户指南/数据迁移/阿里云实例间迁移/从RDS for MySQL迁移至POLARDB for MySQL.md#)从RDS for MySQL迁移至POLARDB|
+|RDS for MySQL实例|[从RDS for MySQL迁移至POLARDB for MySQL](cn.zh-CN/用户指南/数据迁移/阿里云实例间迁移/从RDS for MySQL迁移至POLARDB for MySQL.md#)|
 |MongoDB实例|[从MongoDB单节点实例迁移至副本集或分片集群实例](https://help.aliyun.com/document_detail/127832.html)|
 |[从MongoDB副本集实例迁移至分片集群实例](https://help.aliyun.com/document_detail/113516.html)|
 |[迁移MongoDB实例至其他地域](https://help.aliyun.com/document_detail/127833.html)|
