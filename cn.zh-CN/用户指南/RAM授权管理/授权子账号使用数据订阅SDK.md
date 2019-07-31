@@ -17,23 +17,26 @@ DTS支持的授权策略为读写策略和只读策略。
 
 ## 子账号授权操作步骤 {#section_c5g_21v_mhb .section}
 
-1.  登录[RAM 控制台](https://ram.console.aliyun.com/)创建子账号，详情请参考[创建RAM用户](https://help.aliyun.com/document_detail/28637.html)。
+1.  云账号登录[RAM控制台](https://ram.console.aliyun.com/)。
+2.  [创建RAM用户](../../cn.zh-CN/用户指南/用户/创建 RAM 用户.md#)。
 
-    **说明：** 创建RAM用户时，将访问方式选择**编程访问**并下载保存AK信息。
+    **说明：** 创建RAM用户时，选择**访问方式**为**编程访问**并下载保存AK信息。
 
-2.  在RAM控制台的左侧导航栏，单击**人员管理** \> **用户**。
-3.  定位至创建的RAM用户，在**操作**列单击**添加权限**。
+3.  在左侧导航栏的**人员管理**菜单下，单击**用户**。
+4.  在**用户登录名称/显示名称**列表下，找到目标RAM用户。
+5.  单击**添加权限**。
 
-    ![添加授权](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/155840947145025_zh-CN.png)
+    ![添加授权](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/156456500045025_zh-CN.png)
 
-4.  在添加权限对话框中，配置授权信息。
+6.  在添加权限对话框中，配置授权信息。
 
-    ![配置授权信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/155840947145026_zh-CN.png)
+    ![配置授权信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/156456500145026_zh-CN.png)
 
     1.  选择权限为**系统权限策略**。
     2.  在搜索框中输入dts，展现DTS相关的系统权限策略。
     3.  单击**AliyunDTSFullAccess**策略添加到已选择区域框中。
-5.  单击**确定**并在授权结果对话框中单击**完成**。
+7.  单击**确定**。
+8.  单击**完成**。
 
 ## 通过子账号订阅数据 {#section_hpm_ljg_thb .section}
 
