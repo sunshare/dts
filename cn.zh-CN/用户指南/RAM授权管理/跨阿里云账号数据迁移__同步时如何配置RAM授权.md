@@ -21,13 +21,13 @@
 
 在使用DTS进行数据迁移或者数据同步时，需要在源实例所属云账号中配置RAM授权，将目标实例所属云账号作为授信云账号，允许通过数据传输服务访问源实例所属云账号的相关云资源。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156456502244890_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633244890_zh-CN.png)
 
 ## 准备工作 {#section_4cd_6j9_mg7 .section}
 
 使用目标实例所属的云账号登录[账号管理](https://account.console.aliyun.com/#/secure)页面，获取云账号ID。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156456502244838_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633244838_zh-CN.png)
 
 ## 源实例所属云账号授权DTS访问 {#section_mfw_bgt_lhb .section}
 
@@ -40,11 +40,11 @@
 1.  使用源实例所属云账号登陆[数据传输服务DTS控制台](https://dts.console.aliyun.com/)。
 2.  在弹出的提示对话框中，单击**前往RAM角色授权**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156456502244835_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633244835_zh-CN.png)
 
 3.  在弹出的云资源访问授权对话框中，单击**同意授权**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156456502344836_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633244836_zh-CN.png)
 
 
 ## 将目标实例所属的云账号设置为授信云账号 {#section_rfj_z3t_lhb .section}
@@ -56,7 +56,7 @@
 3.  单击**新建RAM角色**，选择可信实体类型为**阿里云账号**，单击**下一步**。
 4.  在新建RAM角色对话框，配置RAM角色信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156456502344837_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633344837_zh-CN.png)
 
     |配置选项|配置说明|
     |:---|:---|
@@ -70,22 +70,14 @@
     |备注（可选）|填写RAM角色备注名称。|
 
 5.  单击**完成**。
-6.  在左侧导航栏的**权限管理**菜单下，单击**权限策略管理**。
-7.  单击**新建授权策略**，配置授权策略信息。
-    1.  填写**策略名称**，本案例填写策略名称为DTS迁移使用。
-    2.  **配置模式**选择为**脚本配置**。
-    3.  填写授权策略的脚本信息，详情请参见[DTS授权脚本](#section_yvz_2d5_lhb)。
-8.  单击**确认**。
-9.  在左侧导航栏，单击**RAM角色管理**。
-10. 在**RAM角色名称**列表下，找到目标RAM角色。
-11. 单击**添加权限**，被授权主体会自动填入。
-12. 在添加授权对话框中选择权限为**自定义权限策略**，选择自定义的策略**DTS迁移使用**。
+6.  单击**精确授权**。
+7.  在添加权限对话框中选择权限类型为**系统策略**，并输入策略名称：**AliyunDTSRolePolicy**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156456502344840_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633344840_zh-CN.png)
 
-13. 单击**确定**。
-14. 单击**完成**。
-15. 在信任策略管理页签，单击**修改信任策略**，将下述代码复制至策略框中。
+8.  单击**确定**。
+9.  单击**完成**。
+10. 在信任策略管理页签，单击**修改信任策略**，将下述代码复制至策略框中。
 
     **说明：** 您需要将下述代码中的<云账号ID\>更换为您的目标实例所属的云账号ID，云账号ID获取方法请参见[获取目标实例所属的账号ID](#section_4cd_6j9_mg7)。
 
@@ -111,123 +103,4 @@
 
 
 完成权限授权后，即可配置跨云账号数据迁移或同步任务。
-
-## DTS授权脚本 {#section_yvz_2d5_lhb .section}
-
-``` {#codeblock_ski_3iz_qvb}
-{
-    "Version": "1",
-    "Statement": [
-        {
-            "Action": [
-                "rds:Describe*",
-                "rds:CreateDBInstance",
-                "rds:CreateAccount*",
-                "rds:CreateDataBase*",
-                "rds:ModifySecurityIps",
-                "rds:GrantAccountPrivilege"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        },
-        {
-            "Action": [
-                "ecs:DescribeSecurityGroupAttribute",
-                "ecs:DescribeInstances",
-                "ecs:DescribeRegions",
-                "ecs:AuthorizeSecurityGroup"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        },
-        {
-            "Action": [
-                "dhs:ListProject",
-                "dhs:GetProject",
-                "dhs:CreateTopic",
-                "dhs:ListTopic",
-                "dhs:GetTopic",
-                "dhs:UpdateTopic",
-                "dhs:ListShard",
-                "dhs:MergeShard",
-                "dhs:SplitShard",
-                "dhs:PutRecords",
-                "dhs:GetRecords",
-                "dhs:GetCursors"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        },
-        {
-            "Action": [
-                "elasticsearch:DescribeInstance",
-                "elasticsearch:ListInstance",
-                "elasticsearch:UpdateAdminPwd",
-                "elasticsearch:UpdatePublicNetwork",
-                "elasticsearch:UpdateBlackIps",
-                "elasticsearch:UpdateKibanaIps",
-                "elasticsearch:UpdatePublicIps",
-                "elasticsearch:UpdateWhiteIps"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        },
-        {
-            "Action": [
-                "drds:DescribeDrds*",
-                "drds:ModifyDrdsIpWhiteList",
-                "drds:DescribeRegions",
-                "drds:DescribeRdsList",
-                "drds:CeateDrdsDB",
-                "drds:DescribeShardDBs"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        },
-        {
-            "Action": [
-                "polardb:DescribeDBClusterIPArrayList",
-                "polardb:DescribeDBClusterNetInfo",
-                "polardb:DescribeDBClusters",
-                "polardb:DescribeRegions",
-                "polardb:ModifySecurityIps"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        },
-        {
-            "Action": [
-                "dds:DescribeDBInstanceAttribute",
-                "dds:DescribeReplicaSetRole",
-                "dds:DescribeSecurityIps",
-                "dds:DescribeDBInstances",
-                "dds:ModifySecurityIps",
-                "dds:DescribeRegions"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        },
-        {
-            "Action": [
-                "kvstore:DescribeSecurityIps",
-                "kvstore:DescribeInstances",
-                "kvstore:DescribeRegions",
-                "kvstore:ModifySecurityIps"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        },
-        {
-            "Action": [
-                "petadata:DescribeInstanceInfo",
-                "petadata:DescribeSecurityIPs",
-                "petadata:DescribeInstances",
-                "petadata:ModifySecurityIPs"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        }
-    ]
-}
-```
 
