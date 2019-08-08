@@ -25,6 +25,7 @@
 
 ## 注意事项 {#section_ypx_pbk_5fb .section}
 
+-   如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
 -   对于七天之内的异常任务，DTS会尝试自动恢复，可能会导致迁移任务的源端数据库数据覆盖目标实例数据库中写入的业务数据，迁移任务结束后务必将DTS访问目标实例账号的**写权限**用`revoke`命令回收掉。
 
 ## 操作步骤 {#section_nkp_pjx_fhb .section}
@@ -34,12 +35,12 @@
 3.  选择角色为**写入器**的节点。
 4.  查看连接和安全性页面的**终端节点**信息和**安全组**信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156254991741949_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156523510041949_zh-CN.png)
 
 5.  单击**安全组**名称，打开安全组的管理页面。
 6.  右键点击目标安全组，单击**编辑入站规则**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156254991741950_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156523510041950_zh-CN.png)
 
 7.  单击**添加规则**，放通DTS中[源实例地区](#table_jwb_1ns_ngb)对应的IP地址，单击**保存**。具体参数配置说明如下：
 
@@ -48,7 +49,7 @@
     |类型|入站的数据类型，这里选择**MySQL/Aurora**|
     |来源|选择**自定义**，在右侧框内粘贴[DTS IP段](https://help.aliyun.com/document_detail/84900.html)里的IP地址，用英文逗号（,）分隔。|
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156254991741951_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156523510041951_zh-CN.png)
 
 8.  登录[DTS控制台](https://dts.console.aliyun.com/)。
 9.  在左侧菜单栏单击**数据迁移**，单击右上角**创建迁移任务**。
@@ -72,7 +73,7 @@
     |数据库密码|目标实例的对应账号的密码。|
     |连接方式|目标实例的连接方式，选择**非加密传输**。|
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156254991741952_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156523510041952_zh-CN.png)
 
 11. 填写完毕后单击**测试连接**，确定源库和目标库都测试通过。
 12. 单击**授权白名单并进入下一步**。
@@ -82,13 +83,13 @@
 
     -   为保证迁移数据的一致性，建议选择结构迁移+全量数据迁移+增量数据迁移。
     -   结构迁移和全量数据迁移暂不收费，增量数据迁移根据链路规格按小时收费。
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156254991741953_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156523510041953_zh-CN.png)
 
 14. 单击**预检查并启动**，等待预检查结束。
 
     **说明：** 如果检查失败，可以根据错误项的提示进行修复，然后重新启动任务。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156254991841954_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156523510141954_zh-CN.png)
 
 15. 单击**下一步**，在**购买配置确认**对话框中，勾选**《数据传输（按量付费）服务条款》**并单击**立即购买并启动**。
 
@@ -96,7 +97,7 @@
 
 16. 单击目标地域，查看迁移状态。当迁移停止后，状态为已完成。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156254991841955_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150461/156523510141955_zh-CN.png)
 
     **说明：** 当增量迁移无延迟时，AWS和阿里云RDS上面的数据一致，可以停止迁移任务。由于AWS会以最快的速度回收binlog，而增量迁移依赖源库的binlog日志，为了防止未增量同步的binlog日志被清除，您可以调用AWS的存储过程 `mysql.rds_set_configurations`来设置binlog的保存时间。例如将保存时间延长至一天，调用这个存储过程的命令为：
 
