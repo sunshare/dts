@@ -25,6 +25,8 @@
 
 当上面的所有前置条件都配置完成后，就可以开始正式的数据迁移了。下面详细介绍迁移任务配置流程。
 
+**说明：** 如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
+
 1.  登录[DTS控制台](https://dts.console.aliyun.com/)。
 2.  进入**数据迁移**页面，单击右上角**创建迁移任务**，开始迁移任务配置。
 3.  源及目的实例连接信息配置。
@@ -42,7 +44,7 @@
         -   RDS实例ID: 配置迁移的源RDS实例的实例ID。DTS支持经典网络、VPC网络的RDS实例。
         -   数据库账号：连接RDS实例的账号。
         -   数据库密码：上面数据账号对应的密码。
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79931/156447792834297_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79931/156523522334297_zh-CN.png)
 
     -   目标实例信息
 
@@ -51,7 +53,7 @@
         -   POLARDB实例ID： 配置迁移的目标POLARDB实例的实例ID。
         -   数据库账号：连接POLARDB实例的账号。
         -   数据库密码：上面数据账号对应的密码。
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79931/156447792834299_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79931/156523522534299_zh-CN.png)
 
     当配置完连接信息后，点击右下角 授权白名单并进入下一步 进行白名单授权。这个步骤DTS会将DTS服务器的IP地址添加到源RDS实例及目标POLARDB的白名单中，避免因为RDS实例及POLARDB设置了白名单，DTS服务器连接不上实例导致迁移失败。
 
@@ -68,7 +70,7 @@
 
         这个步骤选择要迁移的对象。迁移对象的选择粒度细化为：库、表、列三个粒度。默认情况下，对象迁移到目标POLARDB实例后，对象名跟源RDS实例一致。如果您迁移的对象在源实例跟目标实例上名称不同，那么需要使用DTS提供的对象名映射功能，详细使用方式可以参考[库表列映射](https://help.aliyun.com/document_detail/26628.html?spm=5176.doc26624.6.125.Mpn8On)。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79931/156447792934300_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79931/156523522534300_zh-CN.png)
 
 5.  预检查。
 
@@ -76,7 +78,7 @@
 
     如果预检查失败，那么可以点击具体检查项后的按钮，查看具体的失败详情，并根据失败原因修复后，重新进行预检查。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79931/156447792934301_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79931/156523522634301_zh-CN.png)
 
 6.  迁移任务。
 
