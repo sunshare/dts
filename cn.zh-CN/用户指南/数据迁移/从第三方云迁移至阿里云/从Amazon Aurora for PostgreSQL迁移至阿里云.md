@@ -12,6 +12,7 @@
 ## 注意事项 {#section_abn_bfq_fhb .section}
 
 -   为避免影响您的正常业务使用，请在业务低峰期进行数据迁移。
+-   如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
 -   不支持使用DTS进行[增量迁移](https://help.aliyun.com/knowledge_detail/39252.html)。
 
     **说明：** 使用DTS进行全量数据迁移操作前，须停止Amazon Aurora for PostgreSQL数据库的相关业务，同时为了保障数据一致性，迁移期间请勿在Amazon Aurora for PostgreSQL数据库中写入新的数据。
@@ -57,7 +58,7 @@
 3.  选择角色为**写入器**的节点。
 4.  在连接和安全性区域框，单击VPC安全组名称进入安全组配置页面。
 
-    ![安全组规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150447/156255173241943_zh-CN.png)
+    ![安全组规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150447/156523515741943_zh-CN.png)
 
 5.  在安全组设置页面，将DTS服务器地址添加至入站规则中。
 
@@ -65,7 +66,7 @@
 
     -   在[DTS IP段](https://help.aliyun.com/document_detail/84900.html)文档中，根据目标实例的地域信息，选择需要添加的IP地址段。例如，源数据库的地域为新加坡，目标实例的地域为杭州，那么需要将杭州地区的DTS IP地址段加入至入站规则中。
     -   在加入IP地址段时，您可以一次性加入所需的IP地址，无需逐条添加入站规则。
-    ![编辑AWS入站规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156255173241849_zh-CN.png)
+    ![编辑AWS入站规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156523515741849_zh-CN.png)
 
 
 ## 数据迁移操作步骤 {#section_y5w_bgq_fhb .section}
@@ -75,7 +76,7 @@
 3.  单击数据迁移页面右侧的**创建迁移任务**。
 4.  配置迁移任务的**源库及目标库**信息。
 
-    ![源库及目标库配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156255173241886_zh-CN.png)
+    ![源库及目标库配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156523515741886_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -87,7 +88,7 @@
     |数据库类型|选择**PostgreSQL**。|
     |主机名或IP地址|填入Amazon Aurora for PostgreSQL的连接地址。 **说明：** 您可以在Amazon Aurora for PostgreSQL的基本信息页面，获取数据库的连接信息。
 
- ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156255173241853_zh-CN.png)
+ ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156523515741853_zh-CN.png)
 
 |
     |端口|填入Amazon Aurora for PostgreSQL的服务端口，默认为**5432**。|
@@ -107,14 +108,14 @@
 
 6.  选择**迁移对象**和**迁移类型**。
 
-    ![配置迁移对象和类型](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156255173241890_zh-CN.png)
+    ![配置迁移对象和类型](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156523515841890_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
     |迁移类型|同时勾选**结构迁移**和**全量数据迁移**。 **说明：** 为保障数据一致性，迁移期间请勿在Amazon Aurora for PostgreSQL数据库中写入新的数据。
 
  |
-    |迁移对象|     -   在迁移对象框中将想要迁移的数据库选中，单击![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156255173340698_zh-CN.png)移动到已选择对象框。
+    |迁移对象|     -   在迁移对象框中将想要迁移的数据库选中，单击![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156523515840698_zh-CN.png)移动到已选择对象框。
     -   迁移对象选择的粒度可以为、表、列三个粒度。
     -   默认情况下，对象迁移到阿里云RDS for PostgreSQL数据库后，对象名与源数据库中的迁移对象一致。 如果您迁移的对象在目标数据库中名称不同，那么需要使用DTS提供的对象名映射功能，使用方法请参见[库表列映射](cn.zh-CN/用户指南/数据迁移/库表列映射.md#)。
 
@@ -127,10 +128,10 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156255173341056_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156523515841056_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
 8.  预检查通过后，单击**下一步**。
 9.  在购买配置确认页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
-10. 单击**购买并启动**，迁移任务正式开始。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156255173341894_zh-CN.png) 
+10. 单击**购买并启动**，迁移任务正式开始。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156523515841894_zh-CN.png) 
 
     **说明：** 请勿手动结束任务，否则可能会造成迁移数据丢失，等待迁移状态显示为**已完成**，迁移任务将自动停止。
 
