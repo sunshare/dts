@@ -13,7 +13,7 @@
 
 -   暂不支持香港可用区A的RDS for MySQL实例配置数据同步。
 -   目标实例不支持访问模式为标准模式且只有外网连接地址的RDS for MySQL实例。
--   如果数据同步的源实例没有主键或唯一约束，且记录的全字段没有唯一性，可能会出现重复数据。
+-   如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
 -   全量初始化过程中，并发INSERT会导致目标实例的表碎片，全量初始化完成后，目标实例的表空间比源实例的表空间大。
 -   为保证同步延迟显示的准确性，DTS会在源实例新增一张心跳表，心跳表的表名为：`_##dts_mysql_heartbeat##_`。
 -   DTS暂不支持XA Transaction，当同步过程中遇到XA Transaction会导致同步失败。
@@ -60,12 +60,12 @@ RDS for MySQL实例的数据同步支持所有DML语法和部分DDL语法的同�
 3.  在左侧导航栏，单击**数据同步**。
 4.  在同步作业列表页面顶部，选择数据同步实例所属地域。
 
-    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156514135350604_zh-CN.png)
+    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156523530750604_zh-CN.png)
 
 5.  定位至已购买的数据同步实例，单击**配置同步链路**。
 6.  配置同步通道的源实例及目标实例信息。
 
-    ![MySQL单向同步源目实例信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17124/156514135346140_zh-CN.png)
+    ![MySQL单向同步源目实例信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17124/156523530746140_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -96,11 +96,11 @@ RDS for MySQL实例的数据同步支持所有DML语法和部分DDL语法的同�
 7.  单击页面右下角的**授权白名单并进入下一步**。
 8.  配置同步策略及对象信息。
 
-    ![MySQL单向同步配置同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17124/156514135346145_zh-CN.png)
+    ![MySQL单向同步配置同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17124/156523530846145_zh-CN.png)
 
     |配置项目|配置说明|
     |:---|:---|
-    |选择同步对象| 在源库对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156514135340698_zh-CN.png)将其移动至已选择对象框。
+    |选择同步对象| 在源库对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156523530840698_zh-CN.png)将其移动至已选择对象框。
 
  同步对象的选择粒度为库、表。
 
@@ -114,7 +114,7 @@ RDS for MySQL实例的数据同步支持所有DML语法和部分DDL语法的同�
 9.  上述配置完成后，单击页面右下角的**下一步**。
 10. 配置同步初始化的高级配置信息。
 
-    ![数据同步高级设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156514135341055_zh-CN.png)
+    ![数据同步高级设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156523530841055_zh-CN.png)
 
     -   此步骤会将源实例中已经存在同步对象的结构及数据在目标实例中初始化，作为后续增量同步数据的基线数据。
     -   同步初始化类型细分为：结构初始化，全量数据初始化。默认情况下，需要选择**结构初始化**和**全量数据初始化**。
@@ -123,12 +123,12 @@ RDS for MySQL实例的数据同步支持所有DML语法和部分DDL语法的同�
     **说明：** 
 
     -   在数据同步作业正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步作业。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156514135347468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156523530847468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
 12. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框，同步作业将正式开始。
 13. 等待该同步作业的链路初始化完成，直至处于**同步中**状态。
 
     您可以在 数据同步页面，查看数据同步作业的状态。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156514135341059_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156523530841059_zh-CN.png)
 
 
