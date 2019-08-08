@@ -25,6 +25,10 @@
 -   不支持全量数据初始化，即DTS不会将源RDS实例中同步对象的存量数据同步至目标DataHub实例中。
 -   仅支持表级别的数据同步。
 
+## 注意事项 {#section_svg_ybo_ffs .section}
+
+如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
+
 ## 操作步骤 {#section_qck_cbc_d3b .section}
 
 1.  购买数据同步作业，详情请参见[购买数据同步作业](../../../../cn.zh-CN/快速入门/购买流程.md#section_l2l_34b_rhb)。
@@ -35,12 +39,12 @@
 3.  在左侧导航栏，单击**数据同步**。
 4.  在同步作业列表页面顶部，选择数据同步实例所属地域。
 
-    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156463648850604_zh-CN.png)
+    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156523538350604_zh-CN.png)
 
 5.  定位至已购买的数据同步实例，单击**配置同步链路**。
 6.  配置同步通道的源实例及目标实例信息。
 
-    ![DataHub同步源目信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17129/156463648849690_zh-CN.png)
+    ![DataHub同步源目信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17129/156523538349690_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -67,14 +71,14 @@
 
 8.  配置同步策略及对象信息。
 
-    ![配置同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17129/156463648949691_zh-CN.png)
+    ![配置同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17129/156523538349691_zh-CN.png)
 
     |配置项目|配置说明|
     |:---|:---|
     |同步初始化|勾选**结构初始化**。 **说明：** 勾选**结构初始化**后，在数据同步作业的初始化阶段，DTS会将同步对象的结构信息（例如表结构）同步至目标DataHub实例。
 
  |
-    |选择同步对象| 在源库对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156463648940698_zh-CN.png)将其移动至已选择对象框。
+    |选择同步对象| 在源库对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156523538340698_zh-CN.png)将其移动至已选择对象框。
 
  **说明：** 
 
@@ -87,13 +91,13 @@
     **说明：** 
 
     -   在数据同步作业正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步作业。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156463648947468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156523538347468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
 10. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框，同步作业将正式开始。
 11. 等待该同步作业的链路初始化完成，直至处于**同步中**状态。
 
     您可以在 数据同步页面，查看数据同步作业的状态。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156463648941059_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156523538341059_zh-CN.png)
 
 
 ## Topic结构定义说明 {#section_ezq_3a3_xro .section}
