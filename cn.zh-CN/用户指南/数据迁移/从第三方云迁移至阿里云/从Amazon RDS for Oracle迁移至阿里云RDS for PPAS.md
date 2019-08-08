@@ -11,7 +11,8 @@
 
 ## 注意事项 {#section_mqg_bx0_e21 .section}
 
-对于七天之内的异常任务，DTS会尝试自动恢复，可能会导致迁移任务的源端数据库数据覆盖目标实例数据库中写入的业务数据，迁移任务结束后务必将DTS访问目标实例账号的**写权限**用`revoke`命令回收掉。
+-   对于七天之内的异常任务，DTS会尝试自动恢复，可能会导致迁移任务的源端数据库数据覆盖目标实例数据库中写入的业务数据，迁移任务结束后务必将DTS访问目标实例账号的**写权限**用`revoke`命令回收掉。
+-   如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
 
 ## 迁移账号权限要求 {#section_nyt_yjg_ap7 .section}
 
@@ -69,7 +70,7 @@
 1.  登陆Amazon RDS控制台。
 2.  进入Amazon RDS for Oracle实例的基本信息页面。查看连接和安全性页面的**终端节点**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156514033141904_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156523507541904_zh-CN.png)
 
 3.  单击下方安全组规则中的安全组名称，打开安全组管理页面。
 4.  右键目标安全组名称，选择**编辑入站规则**。
@@ -80,7 +81,7 @@
     |类型|入站的数据类型，这里选择**Oracle-RDS**|
     |来源|选择**自定义**，在右侧框内粘贴[DTS IP段](https://help.aliyun.com/document_detail/84900.html)里的IP地址，用英文逗号（,）分隔。|
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156514033141912_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156523507541912_zh-CN.png)
 
 6.  登录[DTS控制台](https://dts.console.aliyun.com/)。
 7.  在左侧菜单栏单击**数据迁移**，单击右上角**创建迁移任务**。
@@ -106,7 +107,7 @@
     |数据库密码|目标实例的对应账号的密码。|
     |连接方式|有**非加密传输**和**SSL安全连接**两种连接方式，选择SSL安全加密连接会显著增加CPU消耗。|
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156514033141913_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156523507541913_zh-CN.png)
 
 9.  填写完毕后单击**测试连接**，确定源库和目标库都测试通过。
 10. 单击**授权白名单并进入下一步**。
@@ -116,18 +117,18 @@
 
     -   由于AWS数据库不提供dbcreator和sysadmin角色权限，暂不支持增量迁移。
     -   为保障数据一致性，迁移期间请勿在Amazon RDS for Oracle数据库中写入新的数据。
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156514033141914_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156523507541914_zh-CN.png)
 
 12. 单击**预检查并启动**，等待预检查结束。
 
     **说明：** 如果检查失败，可以根据错误项的提示进行修复，然后重新启动任务。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156514033141915_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156523507541915_zh-CN.png)
 
 13. 单击**下一步**，在**购买配置确认**对话框中，勾选**《数据传输（按量付费）服务条款》**并单击**立即购买并启动**。
 14. 单击目标地域，查看迁移状态。迁移完成时，状态为已完成。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156514033241916_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150426/156523507641916_zh-CN.png)
 
     至此，完成 Amazon RDS for Oracle数据库迁移到阿里云 RDS for PPAS 的数据迁移任务。
 
