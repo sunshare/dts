@@ -10,7 +10,7 @@ Kafka是应用较为广泛的分布式、高吞吐量、高可扩展性消息队
 
 ## 注意事项 {#section_2xq_yiu_5lo .section}
 
-如果数据同步的源实例没有主键或唯一约束，且记录的全字段没有唯一性，可能会出现重复数据。
+如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
 
 ## 数据同步功能限制 {#section_ifr_sfd_zgb .section}
 
@@ -117,7 +117,7 @@ DML操作：Insert、Update、Delete、Replace。
 3.  在页面右上角，单击**创建同步作业**。
 4.  购买数据同步实例，参数说明如下表所示。
 
-    ![购买数据同步实例](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/156455758339866_zh-CN.png)
+    ![购买数据同步实例](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/156523542839866_zh-CN.png)
 
     |参数配置区|参数项|说明|
     |:----|:--|:-|
@@ -142,7 +142,7 @@ DML操作：Insert、Update、Delete、Replace。
 3.  定位至已购买的数据同步实例，单击**配置同步链路**。
 4.  配置同步通道的源实例及目标实例信息。
 
-    ![同步通道的源和目标实例配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/135368/156455758340002_zh-CN.png)
+    ![同步通道的源和目标实例配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/135368/156523542840002_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -177,7 +177,7 @@ DML操作：Insert、Update、Delete、Replace。
 5.  单击页面右下角的**授权白名单并进入下一步**。
 6.  配置同步对象信息。
 
-    ![配置同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/156455758339868_zh-CN.png)
+    ![配置同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/156523542839868_zh-CN.png)
 
     **说明：** 
 
@@ -187,7 +187,7 @@ DML操作：Insert、Update、Delete、Replace。
 7.  上述配置完成后单击页面右下角的**下一步**。
 8.  配置同步初始化的高级配置信息。
 
-    ![配置同步初始化](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/156455758439869_zh-CN.png)
+    ![配置同步初始化](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/156523542839869_zh-CN.png)
 
     **说明：** 
 
@@ -198,11 +198,11 @@ DML操作：Insert、Update、Delete、Replace。
     **说明：** 
 
     -   在数据同步任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步任务。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/156455758439870_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/156523542839870_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
 10. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框，数据同步任务正式开始。
 
     您可以在数据同步页面，查看数据同步状态。
 
-    ![查看数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/156455758439871_zh-CN.png)
+    ![查看数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/134337/156523542839871_zh-CN.png)
 
 
