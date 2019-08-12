@@ -14,7 +14,7 @@
 
 ## 前提条件 {#section_2dk_wud_dh1 .section}
 
--   自建SQL Server数据库版本为2005、2008、2008 R2、2012或2016版本。
+-   自建SQL Server数据库版本为2005、2008、2008 R2、2012、2014或2016版本。
 
     **说明：** 如需跨版本迁移，请提前确认兼容性。
 
@@ -77,12 +77,12 @@
 2.  在左侧导航栏，单击**数据迁移**。
 3.  在迁移任务列表页面顶部，选择迁移的目标实例所属地域。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156523488850439_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156560281450439_zh-CN.png)
 
 4.  单击页面右上角的**创建迁移任务**。
 5.  配置迁移任务的源库及目标库信息。
 
-    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17106/156523488847832_zh-CN.png)
+    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17106/156560281547832_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -114,7 +114,7 @@
 
 7.  选择迁移对象及迁移类型。
 
-    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17106/156523488947833_zh-CN.png)
+    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17106/156560281547833_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -126,7 +126,7 @@
  本案例为全量数据迁移，迁移类型中勾选**结构迁移**和**全量数据迁移**。
 
  |
-    |迁移对象| 在迁移对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156523488940698_zh-CN.png)将其移动至已选择对象框。
+    |迁移对象| 在迁移对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156560281540698_zh-CN.png)将其移动至已选择对象框。
 
  **说明：** 
 
@@ -140,7 +140,7 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156523488947468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156560281547468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
 9.  预检查通过后，单击**下一步**。
 10. 在购买配置确认页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 11. 单击**购买并启动**，迁移任务正式开始。
