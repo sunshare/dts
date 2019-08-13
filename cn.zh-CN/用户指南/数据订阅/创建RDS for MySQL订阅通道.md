@@ -6,7 +6,7 @@
 
 源实例为RDS for MySQL，且数据库版本为5.1、5.5、5.6或5.7。
 
-**说明：** 如果待订阅的数据源为8.0版本的RDS for MySQL或自建MySQL数据库，请使用新版数据订阅，详情请参见[创建数据订阅通道（新）](cn.zh-CN/用户指南/数据订阅（新）/创建数据订阅通道.md#)。
+**说明：** 如果待订阅的数据源为8.0版本的RDS for MySQL或自建MySQL数据库，请使用新版数据订阅，详情请参见[创建数据订阅通道（新）](cn.zh-CN/用户指南/数据订阅（新）/创建RDS for MySQL数据订阅通道（新版）.md#)。
 
 ## 注意事项 {#section_81i_r90_n2m .section}
 
@@ -17,11 +17,14 @@
 1.  购买数据订阅通道，详情请参见[购买数据订阅通道](../../../../cn.zh-CN/快速入门/购买流程.md#section_sek_ra8_w7j)。
 2.  登录[数据传输控制台](https://dts.console.aliyun.com/)。
 3.  在左侧导航栏，单击**数据订阅**。
-4.  在数据订阅列表页面上方，选择订阅通道所属地域。
+4.  在数据订阅列表页面顶部，选择订阅通道所属地域。
+
+    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17141/156568261051699_zh-CN.png)
+
 5.  定位至已购买的数据订阅通道，单击**配置订阅通道**。
 6.  配置数据订阅的源库信息。
 
-    ![配置源库信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17141/156316851550973_zh-CN.png)
+    ![配置源库信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17141/156568261050973_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -48,13 +51,13 @@
 
 8.  在弹出的创建订阅账号对话框中，等待账号创建完成后单击**下一步**。
 
-    ![自动创建订阅账号](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/314826/156316851548088_zh-CN.png)
+    ![自动创建订阅账号](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/314826/156568261148088_zh-CN.png)
 
     **说明：** 只有当源RDS实例的数据库类型为**MySQL 5.5**或**MySQL 5.6**时，才需要经过此步骤。在此步骤中，DTS会在源RDS实例中创建用于数据订阅的数据库账号。
 
 9.  配置需要订阅的数据类型和订阅对象。
 
-    ![选择订阅类型和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/314826/156316851548087_zh-CN.png)
+    ![选择订阅类型和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/314826/156568261148087_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -71,7 +74,7 @@
     -   如果选择整个库作为订阅对象，那么该库中新增对象的增量数据也可以被订阅到。
     -   如果选择某个表作为订阅对象，那么只有这个表的增量数据可以被订阅到。此时如果需要加入一个新的表作为订阅对象，您需要将其加入至订阅对象中，详情请参见[修改订阅对象](https://help.aliyun.com/document_detail/26643.html)。
  |
-    |订阅对象| 在订阅对象框中将想要订阅的对象选中，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156316851540698_zh-CN.png)移动到已选择对象框。
+    |订阅对象| 在订阅对象框中将想要订阅的对象选中，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156568261140698_zh-CN.png)移动到已选择对象框。
 
  **说明：** 订阅对象选择的粒度可以为库、表两个粒度。
 
@@ -82,10 +85,10 @@
     **说明：** 
 
     -   在订阅任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动订阅任务。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156316851547468_zh-CN.png)，查看失败详情。根据提示修复问题后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156568261147468_zh-CN.png)，查看失败详情。根据提示修复问题后，重新进行预检查。
 11. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框。
 
 ## 下一步 {#section_hvy_be2_cgc .section}
 
-配置完成后，数据订阅通道会进入初始化阶段，这个阶段一般会持续1分钟左右。初始化完成后即可消费订阅数据，详情请参见[使用SDK消费订阅数据](%E6%95%B0%E6%8D%AE%E8%AE%A2%E9%98%85%20SDK%20%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E7%AE%80%E4%BB%8B)。
+配置完成后，数据订阅通道会进入初始化阶段，这个阶段一般会持续1分钟左右。初始化完成后即可消费订阅数据，详情请参见[使用SDK消费订阅数据](https://help.aliyun.com/document_detail/26647.html)。
 
