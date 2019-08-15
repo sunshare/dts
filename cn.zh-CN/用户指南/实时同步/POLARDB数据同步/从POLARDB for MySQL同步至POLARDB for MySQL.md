@@ -1,198 +1,145 @@
-# 从POLARDB for MySQL同步至POLARDB for MySQL {#concept_sbm_hxy_3hb .concept}
+# 从POLARDB for MySQL同步至POLARDB for MySQL {#concept_sbm_hxy_3hb .task}
 
-本文介绍如何使用数据传输服务DTS快速创建POLARDB for MySQL集群和POLARDB for MySQL集群间的实时同步作业，实现POLARDB for MySQL到POLARDB for MySQL的增量数据实时同步。
+POLARDB是阿里巴巴自主研发的下一代关系型分布式云原生数据库，可完全兼容MySQL，具备简单易用、高性能、高可靠、高可用等优势。通过数据传输服务DTS（Data Transmission Service），您可以将POLARDB for MySQL同步至POLARDB for MySQL，本文以POLARDB for MySQL之间的单向同步为例介绍配置流程。
 
-## 前提条件 {#section_osb_2yy_3hb .section}
+-   已购买源和目标POLARDB for MySQL实例，详情请参见[创建POLARDB for MySQL实例](https://help.aliyun.com/document_detail/58769.html)。
+-   源POLARDB for MySQL实例已开启Binlog，详情请参见[如何开启Binlog](https://help.aliyun.com/document_detail/113546.html)。
 
--   数据同步的源RDS实例和目标RDS实例已存在，如不存在请先创建POLARDB集群，详情请参考[创建POLARDB for MySQL数据库集群](../../../../cn.zh-CN/POLARDB for MySQL快速入门/创建POLARDB for MySQL数据库集群.md#)。
--   开启源POLARDB集群的Binlog，详情请参考[如何开启Binlog](../../../../cn.zh-CN/POLARDB for MySQL用户指南/如何开启Binlog.md#)。
+## 注意事项 {#section_f9g_r3w_gih .section}
+
+-   全量初始化过程中，并发INSERT会导致目标实例的表碎片，全量初始化完成后，目标实例的表空间比源集群的表空间大。
 -   如果数据同步的源实例没有主键或唯一约束，且记录的全字段没有唯一性，可能会出现重复数据。
 
-## 支持的数据源 {#section_fsd_wmy_bgb .section}
+## 支持同步的SQL操作 {#section_2sj_8ni_go3 .section}
 
--   支持同一个阿里云账号下POLARDB集群同POLARDB集群间的实时同步。
--   支持不同阿里云账号下POLARDB集群同POLARDB集群间的实时同步，须使用目标POLARDB所属的阿里云账号配置数据同步任务。
+-   INSERT、UPDATE、DELETE、REPLACE
+-   ALTER TABLE、ALTER VIEW、ALTER FUNCTION、ALTER PROCEDURE
+-   CREATE DATABASE、CREATE SCHEMA、CREATE INDEX、CREATE TABLE、CREATE PROCEDURE、CREATE FUNCTION、CREATE TRIGGER、CREATE VIEW、CREATE EVENT
+-   DROP FUNCTION、DROP EVENT、DROP INDEX、DROP PROCEDURE、DROP TABLE、DROP TRIGGER、DROP VIEW
+-   RENAME TABLE、TRUNCATE TABLE
 
-## 支持的同步语法 {#section_qpw_cny_bgb .section}
+## 支持的同步架构 {#section_mt9_gf0_zz8 .section}
 
-对于**POLARDB** \> **POLARDB**数据同步，DTS支持同步的SQL操作包括：
+-   一对一单向同步
+-   一对多单向同步
+-   级联单向同步
+-   多对一单向同步
+-   一对一双向同步
 
--   INSERT、UPDATE、DELETE、REPLACE。
--   ALTER TABLE、ALTER VIEW、ALTER FUNCTION、ALTER PROCEDURE。
--   CREATE DATABASE、CREATE SCHEMA、CREATE INDEX、CREATE TABLE、CREATE PROCEDURE、CREATE FUNCTION、CREATE TRIGGER、CREATE VIEW、CREATE EVENT。
--   DROP FUNCTION、DROP EVENT、DROP INDEX、DROP PROCEDURE、DROP TABLE、DROP TRIGGER、DROP VIEW。
--   RENAME TABLE、TRUNCATE TABLE。
-
-## 同步限制 {#section_tf3_kny_bgb .section}
-
-**数据源**
-
-对于下列DDL语句，如果**new\_tbl\_name**不在指定的同步对象中，则不支持对此 DDL进行复制。
-
-```language-sql
-rename table tbl_name to new_tbl_name;
-create table tbl_name like new_tbl_name;
-create…select…from new_tbl_name;
-alter table tbl_name rename to new_tbl_name;
-```
-
-**同步架构**
-
-目前数据传输服务提供的实时同步功能支持的同步架构有限，其仅能支持如下架构。如果在配置同步链路过程中，配置不在下述支持范围内的的同步架构，那么预检查中的**复杂拓扑**检查项会检查失败。
-
-1.  **A** \> **B**即一对一单向同步。要求实例B中同步的对象必须为只读，否则会导致同步链路异常，出现数据不一致的情况。
-
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/156523555934086_zh-CN.png)
-
-2.  **A** \> **B/C/D**即一对多的分发式同步架构。此架构对POLARDB集群个数没有限制，但是要求目标实例中的同步对象必须为只读，否则会导致同步链路异常，出现数据不一致的情况。
-
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/156523555934087_zh-CN.png)
-
-3.  **B/C/D** \> **A**即多对一的数据汇总架构。为保证同步数据一致性，要求每条同步链路同步的对象不相同。
-
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/156523556034088_zh-CN.jpg)
-
-4.  A-\>B-\>C 即级联架构。
-
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/156523556034089_zh-CN.png)
-
-5.  **A** \> **B** \> **A**即集群A和集群B之间的双向同步架构。
-
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/156523556034090_zh-CN.png)
-
-    **说明：** 
-
-    如果需要使用双向同步，需要在[购买同步链路](#section_pdn_1pj_dhb)时，选择**双向同步**，并在 [数据传输 DTS 控制台](https://dts.console.aliyun.com/) 中根据指引进行配置。
+    **说明：** 关于双向同步的配置方法，请参见[RDS for MySQL实例间的双向同步](cn.zh-CN/用户指南/实时同步/MySQL实时同步至MySQL/RDS for MySQL实例间的双向同步.md#)。
 
 
-**功能限制**
+关于各类同步架构的介绍及注意事项，请参见[数据同步拓扑介绍](cn.zh-CN/用户指南/实时同步/数据同步拓扑介绍.md#)。
 
--   不兼容触发器。
+## 功能限制 {#section_4zc_bvg_rjj .section}
 
-    同步对象为整个库且这个库中包含了会更新同步表内容的触发器，那么可能导致同步数据不一致。例如数据库中存在了表A和表B。表A上有一个触发器，触发器内容为在insert一条数据到表A之后，在表B中插入一条数据。这种情况在同步过程中，如果源实例表A上进行了Insert操作，则会导致表B在源实例跟目标实例数据不一致。
+-   不兼容触发器
 
-    此类情况需要将目标实例中的对应触发器删除掉，表B的数据由源实例同步过去，详情请参考[触发器存在情况下如何配置同步作业](https://help.aliyun.com/document_detail/26655.html) 。
+    同步对象为整个库且这个库中包含了会更新同步表内容的触发器，那么可能导致同步数据不一致。例如数据库中存在了两个表A和B。表A上有一个触发器，触发器内容为在INSERT一条数据到表A之后，在表B中插入一条数据。这种情况在同步过程中，如果源实例表A上进行了INSERT操作，则会导致表B在源实例跟目标实例数据不一致。
 
--   rename table限制。
+    此类情况须要将目标实例中的对应触发器删除掉，表B的数据由源实例同步过去，详情请参见[触发器存在情况下如何配置同步作业](https://help.aliyun.com/document_detail/26655.html) 。
 
-    rename table操作可能导致同步数据不一致。例如同步对象只包含表A，如果同步过程中源实例将表A重命名为表B，那么表B将不会被同步到目标库。为避免该问题，您可以在数据同步配置时，选择同步表A和表B所在的整个数据库作为同步对象。
+-   RENAME TABLE限制
 
--   DDL语法同步方向限制。
-
-    为保障双向同步链路的稳定性，对于同一张表的DDL更新只能在其中一个同步方向进行同步。即一旦某个同步方向配置了DDL同步，则在反方向上不支持DDL同步，只进行DML同步。
+    RENAME TABLE操作可能导致同步数据不一致。例如同步对象只包含表A，如果同步过程中源实例将表A重命名为表B，那么表B将不会被同步到目标库。为避免该问题，您可以在数据同步配置时，选择同步表A和表B所在的整个数据库作为同步对象。
 
 
-## 操作步骤一 购买数据同步实例 {#section_pdn_1pj_dhb .section}
+## 操作步骤 {#section_dza_oxo_938 .section}
 
-1.  登录[数据传输服务DTS控制台](https://dts.console.aliyun.com/)。
-2.  在左侧导航栏，单击**数据同步**。
-3.  在页面右上角，单击**创建同步作业**。
-4.  在数据传输服务购买页面，选择付费类型为**预付费**或**按量付费**。
-    -   预付费：属于预付费，即在新建实例时需要支付费用。适合长期需求，价格比按量付费更实惠，且购买时长越长，折扣越多。
-    -   按量付费：属于后付费，即按小时扣费。适合短期需求，用完可立即释放实例，节省费用。
-5.  选择数据同步实例的参数配置信息，参数说明如下表所示。
+1.  [购买数据同步作业](../../../../cn.zh-CN/快速入门/购买流程.md#section_39h_fto_gdl) 
 
-    |参数配置区|参数项|说明|
-    |:----|:--|:-|
-    |基本配置|功能|选择**数据同步**。|
-    |源实例|选择**MySQL**。|
-    |源实例地域|选择数据同步链路中源POLARDB集群的地域。 **说明：** 订购后不支持更换地域，请谨慎选择。
+    **说明：** 购买时，选择源实例为**POLARDB**，目标实例为**MySQL**，并选择同步拓扑为**单向同步**。
+
+2.  登录[数据传输控制台](https://dts.console.aliyun.com/)。
+3.  在左侧导航栏，单击**数据同步**。
+4.  在同步作业列表页面顶部，选择数据同步实例所属地域。 
+
+    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156583233850604_zh-CN.png)
+
+5.  定位至已购买的数据同步实例，单击**配置同步链路**。
+6.  配置同步通道的源实例及目标实例信息。 
+
+    ![配置源库和目标实例信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/159809/156583233855036_zh-CN.png)
+
+    |配置项目|配置选项|配置说明|
+    |:---|:---|:---|
+    |任务名称|-|     -   DTS为每个任务自动生成一个任务名称，任务名称没有唯一性要求。
+    -   您可以根据需要修改任务名称，建议为任务配置具有业务意义的名称，便于后续的任务识别。
+ |
+    |源实例信息|实例类型|选择**POLARDB**。|
+    |实例地区|购买数据同步实例时选择的源实例地域信息，不可变更。|
+    |数据库账号|填入连接POLARDB实例的数据库账号。 **说明：** 该账号需具备待同步对象的SELECT、REPLICATION CLIENT、REPLICATION SLAVE权限。
 
  |
-    |目标实例|选择**MySQL**。|
-    |目标实例地域|选择数据同步链路中目标POLARDB集群的地域。 **说明：** 订购后不支持更换地域，请谨慎选择。
+    |数据库密码|填入数据库账号对应的密码。|
+    |目标实例信息|实例类型|选择为**通过专线/VPN网关/智能网关接入的自建数据库**。|
+    |实例地区|购买数据同步实例时选择的目标实例地域信息，不可变更。|
+    |对端专有网络|选择POLARDB实例所属的专有网络。 您可以登录[POLARDB控制台](https://polardb.console.aliyun.com/)，单击目标实例ID，进入该实例的**基本信息**页面来获取。
+
+ ![获取VPC Id](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1227086/156583233854382_zh-CN.png)
+
+|
+    |数据库类型|选择为**MySQL**。|
+    |IP地址|配置POLARDB主实例的私网IP地址，本案例中填入**172.16.20.20**。 您可以在电脑中ping目标POLARDB实例的**主地址（私网）**来获取私网IP地址。
+
+ ![获取POLARDB的私网IP地址](images/54390_zh-CN.gif)
+
+|
+    |端口|填入POLARDB实例的服务端口，默认为**3306**。|
+    |数据库账号|填入连接POLARDB实例的数据库账号。 **说明：** 用于数据同步的数据库账号需具备目标同步对象的ALL权限。
 
  |
-    |同步拓扑|数据同步支持的拓扑类型，根据业务需求进行选择，本案例选择为**单向同步**。|
-    |网络类型|数据同步服务使用的网络类型，目前固定为**专线**。|
-    |同步链路规格|数据传输为您提供了不同性能的链路规格，以同步的记录数为衡量标准。详情请参考[数据同步规格说明](https://help.aliyun.com/document_detail/26605.html)。|
-    |购买量|购买数量|一次性购买数据同步实例的数量，默认为1，如果购买的是按量付费实例，一次最多购买 99 条链路。|
+    |数据库密码|填入数据库账号对应的密码。|
 
-6.  单击**立即购买**，根据提示完成支付流程。
+7.  单击页面右下角的**授权白名单并进入下一步**。 
 
-## 操作步骤二 配置同步链路 {#section_g3l_jxy_bgb .section}
+    **说明：** 此步骤会将DTS服务器的IP地址自动添加到源和目标POLARDB实例的白名单中，用于保障DTS服务器能够正常连接源和目标实例。
 
-1.  登录[数据传输服务DTS控制台](https://dts.console.aliyun.com/)。
-2.  在左侧导航栏，单击**数据同步**。
-3.  定位至已购买的数据同步实例，单击目标实例**操作**栏中的**配置同步链路**。
-4.  配置同步通道的源实例及目标实例信息。
+8.  配置目标已存在表的处理模式和同步对象。 
 
-    ![POLARDB数据同步源目库配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/155093/156523556043503_zh-CN.png)
+    ![配置处理模式和同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/89979/156583233854325_zh-CN.png)
 
-    1.  配置任务名称。
+    |配置项目|配置说明|
+    |:---|:---|
+    |目标已存在表的处理模式|     -   **预检查并报错拦截**：检查目标数据库中是否有同名的表。如果目标数据库中没有同名的表，则通过该检查项目；如果目标数据库中有同名的表，则在预检查阶段提示错误，数据同步作业不会被启动。
 
-        -   DTS为每个任务自动生成一个任务名称，任务名称没有唯一性要求。
-        -   您可以根据需要修改任务名称，建议为任务配置具有业务意义的名称，便于后续的任务识别。
-    2.  配置源实例信息。
+**说明：** 如果目标库中同名的表不方便删除或重命名，您可以[设置同步对象在目标实例中的名称](cn.zh-CN/用户指南/实时同步/设置同步对象在目标实例中的名称.md#)来避免表名冲突。
 
-        |配置项目|配置选项|配置说明|
-        |:---|:---|:---|
-        |源实例信息|实例类型|选择**通过专线/VPN网关/智能网关接入的自建数据库**。|
-        |对端专有网络|此处选择为源POLARDB的VPC ID。 **说明：** VPC ID可以到POLARDB控制台的基本信息页面获取。
+    -   **无操作**：跳过目标数据库中是否有同名表的检查项。
 
+**警告：** 选择为**无操作**，可能导致数据不一致，给业务带来风险，例如：
+
+        -   表结构一致的情况下，如果在目标库遇到与源库主键的值相同的记录，在初始化阶段会保留目标库中的该条记录；在增量同步阶段则会覆盖目标库的该条记录。
+        -   表结构不一致的情况下，可能会导致无法初始化数据、只能同步部分列的数据或同步失败。
  |
-        |数据库类型|固定为**MySQL**。|
-        |IP地址|填入源POLARDB主实例的私网IP地址。您可以在ECS中ping该POLARDB集群的主地址（私网）来获取该IP地址。 **说明：** 填写IP地址而不是域名，例如应该填写 192.168.xx.xx，而不是 pc-xxxxx.mysql.polardb.rds.aliyuncs.com。
+    |选择同步对象| 在源库对象框中单击待同步的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156583233840698_zh-CN.png)将其移动至已选择对象框。
 
- |
-        |端口|填入源POLARDB集群的监听端口，默认为**3306**。|
-        |数据库账号|填入源POLARDB集群的数据库账号。|
-        |数据库密码|填入源POLARDB集群数据库账号对应的密码。|
+ 同步对象的选择粒度为库、表。
 
-    3.  配置目标实例信息。
+ **说明：** 
 
-        |配置项目|配置选项|配置说明|
-        |:---|:---|:---|
-        |目标实例信息|实例类型|选择**通过专线/VPN网关/智能网关接入的自建数据库**。|
-        |对端专有网络|此处选择为目标POLARDB集群的VPC ID。具体VPC ID可以到POLARDB控制台的基本信息页面获取。|
-        |数据库类型|选择为**MySQL**。|
-        |IP地址|填入目标POLARDB主实例的私网IP地址。在ECS中ping该POLARDB集群的**主地址（私网）**可以获取该IP地址。 **说明：** 填写IP地址而不是域名，例如应该填写 192.168.xx.xx，而不是 pc-xxxxx.mysql.polardb.rds.aliyuncs.com。
-
- |
-        |端口|填入目标POLARDB集群的监听端口，默认为**3306**。|
-        |数据库账号|填入目标POLARDB集群的数据库账号。|
-        |数据库密码|填入目标POLARDB集群数据库账号对应的密码。|
-
-5.  上述步骤配置完成后，单击页面右下角的**授权白名单并进入下一步**。
-
-    **说明：** 此步骤会将DTS服务器的IP地址自动添加到源POLARDB集群和目标POLARDB集群的白名单中，用于保障DTS服务器能够正常连接目标POLARDB集群。
-
-6.  选择同步对象。
-
-    -   同步对象的选择粒度为库、表。
     -   如果选择整个库作为同步对象，那么该库中所有对象的结构变更操作都会同步至目标库。
-    -   如果选择某个表作为同步对象，那么只有这个表的drop/alter/truncate/rename table、create/drop index操作会同步至目标库。
-    ![POLARDB数据同步迁移对象配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/155093/156523556043506_zh-CN.png)
+    -   默认情况下，同步对象的名称保持不变。如果您需要同步对象在目标实例上名称不同，那么需要使用DTS提供的对象名映射功能，详情请参见[设置同步对象在目标实例中的名称](cn.zh-CN/用户指南/实时同步/设置同步对象在目标实例中的名称.md#)。
+ |
 
-7.  配置同步初始化的高级配置信息。
+9.  上述配置完成后，单击页面右下角的**下一步**。
+10. 配置同步初始化的高级配置信息。 
 
-    -   此步骤会将源实例中已经存在同步对象的结构及数据在目标实例中初始化，作为后续增量同步数据的基线数据。
-    -   同步初始化类型细分为：结构初始化，全量数据初始化。默认情况下，须选择**结构初始化**和**全量数据初始化**。
+    ![数据同步高级设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156583233941055_zh-CN.png)
 
-        **说明：** 全量初始化过程中，并发Insert导致目标实例的表碎片，全量初始化完成后，目标实例的表空间比源集群的表空间大。
+    **说明：** 同步初始化类型细分为：结构初始化，全量数据初始化。选择**结构初始化**和**全量数据初始化**后，DTS会在增量数据同步之前，将源数据库中待同步对象的结构和存量数据，同步到目标数据库。
 
-    ![POLARDB数据同步初始化配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/155093/156523556043508_zh-CN.png)
-
-8.  上述配置完成后，单击页面右下角的**预检查并启动**。
+11. 上述配置完成后，单击页面右下角的**预检查并启动**。 
 
     **说明：** 
 
-    -   在数据同步任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步任务。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/155093/156523556143501_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
-9.  在预检查对话框中显示**预检查通过**后，关闭预检查对话框，该同步作业的同步任务正式开始。
-10. 等待该同步作业的链路初始化完成，直至状态处于**同步中**。
+    -   在数据同步作业正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步作业。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156583233947468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
+12. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框，同步作业将正式开始。
+13. 等待同步作业的链路初始化完成，直至处于**同步中**状态。 
 
-    ![数据同步中](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/155093/156523556143517_zh-CN.png)
+    您可以在 数据同步页面，查看数据同步作业的状态。
 
-
-## 故障排查 {#section_mfx_jxw_fhb .section}
-
--   如果单击**授权白名单并进入下一步**后，提示**当前请求失败，建议您刷新页面或稍后重试**，请检查POLARDB集群地址，该地址为IP地址，例如192.168.xx.xx，而不是域名地址。在ECS实例中ping该POLARDB集群的**主地址（私网）**可以获取该IP地址。
-
-    ![当前请求失败](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/156523556141928_zh-CN.png)
-
--   如果预检查失败，提示**源库binlog开启检查**失败，请参见[如何开启Binlog](../../../../cn.zh-CN/POLARDB for MySQL用户指南/如何开启Binlog.md#)。
-
-    ![源库binlog开启检查](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79400/156523556141938_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156583233941059_zh-CN.png)
 
 
