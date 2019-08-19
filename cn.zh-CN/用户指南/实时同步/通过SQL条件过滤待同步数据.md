@@ -8,17 +8,18 @@
 
 ## 功能限制 {#section_sls_2xb_b3b .section}
 
-SQL过滤条件只作用于全量数据同步阶段，不会作用于增量数据同步阶段。
+-   SQL过滤条件只作用于全量数据同步阶段，不会作用于增量数据同步阶段。
+-   仅支持过滤当前表的字段，不支持跨表过滤。
 
 ## 操作步骤 {#section_npm_fxb_b3b .section}
 
 1.  在**选择同步对象**环节，将要同步的对象移动到已选择对象区域框中后，把鼠标指针放置在要修改的数据表上，并单击数据表后出现的**编辑**。
 
-    ![选择表](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/960956/156454159551519_zh-CN.png)
+    ![选择表](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/960956/156619877251519_zh-CN.png)
 
 2.  在弹出的**编辑表**对话框中，填入**过滤条件**。
 
-    ![配置SQL过滤条件](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17121/156454159549114_zh-CN.png)
+    ![配置SQL过滤条件](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17121/156619877249114_zh-CN.png)
 
     **说明：** 过滤条件支持标准的SQL WHERE语句，只有满足WHERE条件的数据才会被同步到目标数据库中。本案例填入`orderid>100`。
 
