@@ -11,7 +11,7 @@
 
 目前DTS仅支持两个MySQL数据库之间的双向同步，暂不支持多个MySQL数据库之间的双向同步。
 
-![双向数据同步架构](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156377377441047_zh-CN.png)
+![双向数据同步架构](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156620004741047_zh-CN.png)
 
 ## 支持的数据源 {#section_w5t_1w3_dhb .section}
 
@@ -77,6 +77,7 @@ DTS通过冲突检测和修复最大程度地维护双向同步实例的稳定�
 
 ## 功能限制 {#section_mkt_dw3_dhb .section}
 
+-   请勿在数据同步时，对源库使用gh-ost或pt-online-schema-change等类似工具执行在线DDL变更，否则会导致同步失败。
 -   不兼容触发器
 
     同步对象为整个库且这个库中包含了会更新同步表内容的触发器，那么可能导致同步数据不一致。例如数据库中存在了两个表A和B。表A上有一个触发器，触发器内容为在insert一条数据到表A之后，在表B中插入一条数据。这种情况在同步过程中，如果源实例表A上进行了Insert操作，则会导致表B在源实例跟目标实例数据不一致。
@@ -102,17 +103,17 @@ DTS通过冲突检测和修复最大程度地维护双向同步实例的稳定�
 3.  在左侧导航栏，单击**数据同步**。
 4.  在同步作业列表页面顶部，选择数据同步实例所属地域。
 
-    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156377377450604_zh-CN.png)
+    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156620004750604_zh-CN.png)
 
 5.  定位至已购买的数据同步实例，单击该实例下第一个同步作业的**配置同步链路**。
 
     **说明：** 一个双向数据同步实例会包含两个同步作业，需要分别进行配置。
 
-    ![双向同步任务](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156377377441151_zh-CN.png)
+    ![双向同步任务](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156620004741151_zh-CN.png)
 
 6.  配置同步通道的源实例及目标实例信息。
 
-    ![RDS双向同步源目实例配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156377377441052_zh-CN.png)
+    ![RDS双向同步源目实例配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156620004841052_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -143,7 +144,7 @@ DTS通过冲突检测和修复最大程度地维护双向同步实例的稳定�
 7.  单击页面右下角的**授权白名单并进入下一步**。
 8.  配置同步策略及对象信息。
 
-    ![RDS双向同步对象及策略配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156377377441053_zh-CN.png)
+    ![RDS双向同步对象及策略配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156620004841053_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -155,7 +156,7 @@ DTS通过冲突检测和修复最大程度地维护双向同步实例的稳定�
  |
     |DML同步类型|定义需要同步的DML类型，默认为**Insert**、**Update**、**Delete**，您可以根据业务需求调整同步的DML类型。|
     |冲突修复策略|定义同步冲突的修复策略，默认为**TaskFailed**，您可以根据业务情况选择合适的冲突修复策略，详情请参见[冲突修复策略](#section_jhm_cw3_dhb)。|
-    |选择同步对象|-| 在源库对象框中单击待同步的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156377377540698_zh-CN.png)将其移动到已选择对象框。
+    |选择同步对象|-| 在源库对象框中单击待同步的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156620004840698_zh-CN.png)将其移动到已选择对象框。
 
  同步对象的选择粒度为库、表。
 
@@ -168,7 +169,7 @@ DTS通过冲突检测和修复最大程度地维护双向同步实例的稳定�
 9.  上述配置完成后，单击页面右下角的**下一步**。
 10. 配置同步初始化的高级配置信息。
 
-    ![数据同步高级设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156377377541055_zh-CN.png)
+    ![数据同步高级设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156620004841055_zh-CN.png)
 
     -   此步骤会将源实例中已经存在同步对象的结构及数据在目标实例中初始化，作为后续增量同步数据的基线数据。
     -   同步初始化类型细分为：结构初始化，全量数据初始化。默认情况下，需要选择**结构初始化**和**全量数据初始化**。
@@ -179,7 +180,7 @@ DTS通过冲突检测和修复最大程度地维护双向同步实例的稳定�
     **说明：** 
 
     -   在数据同步任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156377377547468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156620004847468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
 12. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框，同步作业将正式开始。
 13. 等待该同步作业的链路初始化完成，直至状态处于**同步中**。
 
@@ -187,10 +188,10 @@ DTS通过冲突检测和修复最大程度地维护双向同步实例的稳定�
 
 14. 定位至第二个同步作业，单击**配置同步链路**，配置流程参见步骤5到步骤12。
 
-    ![配置反向数据同步](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156377377541152_zh-CN.png)
+    ![配置反向数据同步](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156620004841152_zh-CN.png)
 
 15. 第二个同步作业配置完成后，等待两个同步作业的链路状态均处于**同步中**，即完成双向数据同步的配置流程。
 
-    ![双向数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156377377541154_zh-CN.png)
+    ![双向数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156620004841154_zh-CN.png)
 
 
