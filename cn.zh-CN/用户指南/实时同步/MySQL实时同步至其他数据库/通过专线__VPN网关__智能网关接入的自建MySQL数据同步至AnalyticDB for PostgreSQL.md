@@ -8,9 +8,10 @@
 -   源库中待同步的数据表，必须有主键。
 -   数据同步的目标AnalyticDB for PostgreSQL实例已存在，如不存在请[创建AnalyticDB for PostgreSQL实例](https://help.aliyun.com/document_detail/50200.html)。
 
-## 注意事项 {#section_3ub_j4u_v85 .section}
+## 注意事项 {#section_agy_6r3_282 .section}
 
-如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
+-   请勿在数据同步时，对源库的同步对象使用gh-ost或pt-online-schema-change等类似工具执行在线DDL变更，否则会导致同步失败。
+-   如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
 
 ## 数据同步功能限制 {#section_dwq_cwz_nhb .section}
 
@@ -41,7 +42,7 @@
 
 ## 数据同步前准备工作 {#section_87v_5ui_28f .section}
 
-在正式配置数据同步作业之前，您需要[为自建MySQL创建账号并设置binlog](cn.zh-CN/用户指南/实时同步/为自建MySQL创建账号并设置binlog.md#)。
+在正式配置数据同步作业之前，您需要[为自建MySQL创建账号并设置binlog](cn.zh-CN/用户指南/准备工作（自建库）/为自建MySQL创建账号并设置binlog.md#)。
 
 ## 操作步骤一 在目标实例中创建对应的数据结构 {#section_hqy_lbs_mqm .section}
 
@@ -60,7 +61,7 @@
 4.  定位至已购买的数据同步实例，单击**配置同步链路**。
 5.  配置同步通道的源实例及目标实例信息。
 
-    ![配置数据同步的源库和目标库信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/189997/156569040946067_zh-CN.png)
+    ![配置数据同步的源库和目标库信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/189997/156620053646067_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -89,7 +90,7 @@
 6.  单击页面右下角的**授权白名单并进入下一步**。
 7.  配置同步策略及对象信息。
 
-    ![配置同步策略和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156569041045690_zh-CN.png)
+    ![配置同步策略和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156620053645690_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -127,12 +128,12 @@
     **说明：** 
 
     -   在数据同步任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步任务。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156569041045708_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156620053745708_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
 9.  在预检查对话框中显示**预检查通过**后，关闭预检查对话框，该同步作业的同步任务正式开始。
 10. 等待该同步作业的链路初始化完成，直至状态处于**同步中**。
 
     您可以在 数据同步页面，查看数据同步状态。
 
-    ![数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156569041045691_zh-CN.png)
+    ![数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156620053745691_zh-CN.png)
 
 
