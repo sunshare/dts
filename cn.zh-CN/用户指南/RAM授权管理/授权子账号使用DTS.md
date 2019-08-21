@@ -8,41 +8,41 @@ DTS支持的授权策略为读写策略和只读策略。
 
 **说明：** 授权策略暂不支持API粒度的访问授权。
 
--   读写策略，策略名称为：**AliyunDTSFullAccess**。
+-   读写策略：**AliyunDTSFullAccess**。
 
     该策略拥有DTS所有读写权限，授权了该策略的子账号可以进行DTS实例的购买、配置、管理等操作。
 
--   只读策略，策略名称为：**AliyunDTSReadOnlyAccess**。
+-   只读策略：**AliyunDTSReadOnlyAccess**。
 
     该策略拥有DTS所有读权限，授权了该权限的子账号可以查看主账号下所有DTS任务的任务详情、任务配置等信息，不能进行变更操作。
 
     **说明：** 变更操作主要包括：DTS实例的购买、配置、管理等操作。
 
 
-## 子账号授权操作步骤 {#section_c5g_21v_mhb .section}
+## 操作步骤 {#section_c5g_21v_mhb .section}
 
 1.  云账号登录[RAM控制台](https://ram.console.aliyun.com/)。
-2.  [创建RAM用户](../../cn.zh-CN/用户指南/用户/创建 RAM 用户.md#)
+2.  [创建RAM用户](../../cn.zh-CN/用户指南/用户/创建 RAM 用户.md#)。
 3.  在左侧导航栏的**人员管理**菜单下，单击**用户**。
 4.  在**用户登录名称/显示名称**列表下，找到目标RAM用户。
 5.  单击**添加权限**。
 
-    ![添加授权](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/156456497245025_zh-CN.png)
+    ![添加授权](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/156634996845025_zh-CN.png)
 
 6.  在添加权限对话框中，配置授权信息。
 
-    ![配置授权信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/156456497345026_zh-CN.png)
+    ![配置授权信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17087/156634996945026_zh-CN.png)
 
     1.  选择权限为**系统权限策略**。
     2.  在搜索框中输入dts，展现DTS相关的系统权限策略。
     3.  根据业务需求，单击要授权的权限策略添加到已选择区域框中。
 
-        **说明：** 策略说明请参见[策略说明](#section_xp2_lz5_mhb)。
+        **说明：** 关于策略的详细说明，请参见[策略说明](#section_xp2_lz5_mhb)。
 
 7.  单击**确定**。
 8.  单击**完成**。
 
 ## 后续操作 {#section_vdp_tcv_mhb .section}
 
-使用RAM用户登录控制台，详情请参考[RAM用户登录控制台](https://help.aliyun.com/document_detail/43640.html)。
+[使用RAM用户登录控制台](https://help.aliyun.com/document_detail/43640.html)。
 
