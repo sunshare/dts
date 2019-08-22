@@ -9,6 +9,7 @@
 
 ## 注意事项 {#section_y1n_fgp_88b .section}
 
+-   如果同步对象为单个或多个表（非整库），那么在数据同步时，请勿对源库的同步对象使用gh-ost或pt-online-schema-change等类似工具执行在线DDL变更，否则会导致同步失败。
 -   全量初始化过程中，并发INSERT会导致目标实例的表碎片，全量初始化完成后，目标实例的表空间比源集群的表空间大。
 -   如果数据同步的源实例没有主键或唯一约束，且记录的全字段没有唯一性，可能会出现重复数据。
 
@@ -20,16 +21,12 @@
 -   DROP FUNCTION、DROP EVENT、DROP INDEX、DROP PROCEDURE、DROP TABLE、DROP TRIGGER、DROP VIEW
 -   RENAME TABLE、TRUNCATE TABLE
 
-## 支持的同步架构 {#section_ov3_hbi_0we .section}
+## 支持的同步架构 {#section_fpk_i7k_7pe .section}
 
 -   一对一单向同步
 -   一对多单向同步
 -   级联单向同步
 -   多对一单向同步
--   一对一双向同步
-
-    **说明：** 关于双向同步的配置方法，请参见[RDS for MySQL实例间的双向同步](cn.zh-CN/用户指南/实时同步/MySQL实时同步至MySQL/RDS for MySQL实例间的双向同步.md#)。
-
 
 关于各类同步架构的介绍及注意事项，请参见[数据同步拓扑介绍](cn.zh-CN/用户指南/实时同步/数据同步拓扑介绍.md#)。
 
@@ -56,12 +53,12 @@
 3.  在左侧导航栏，单击**数据同步**。
 4.  在同步作业列表页面顶部，选择数据同步实例所属地域。 
 
-    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156584876450604_zh-CN.png)
+    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156645100050604_zh-CN.png)
 
 5.  定位至已购买的数据同步实例，单击**配置同步链路**。
 6.  配置同步通道的源实例及目标实例信息。 
 
-    ![配置源实例和目标实例信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/89979/156584876454326_zh-CN.png)
+    ![配置源实例和目标实例信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/89979/156645100154326_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -89,7 +86,7 @@
 
 8.  配置目标已存在表的处理模式和同步对象。 
 
-    ![配置处理模式和同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/89979/156584876554325_zh-CN.png)
+    ![配置处理模式和同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/89979/156645100254325_zh-CN.png)
 
     |配置项目|配置说明|
     |:---|:---|
@@ -104,7 +101,7 @@
         -   表结构一致的情况下，如果在目标库遇到与源库主键的值相同的记录，在初始化阶段会保留目标库中的该条记录；在增量同步阶段则会覆盖目标库的该条记录。
         -   表结构不一致的情况下，可能会导致无法初始化数据、只能同步部分列的数据或同步失败。
  |
-    |选择同步对象| 在源库对象框中单击待同步的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156584876540698_zh-CN.png)将其移动至已选择对象框。
+    |选择同步对象| 在源库对象框中单击待同步的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156645100340698_zh-CN.png)将其移动至已选择对象框。
 
  同步对象的选择粒度为库、表。
 
@@ -117,7 +114,7 @@
 9.  上述配置完成后，单击页面右下角的**下一步**。
 10. 配置同步初始化的高级配置信息。 
 
-    ![数据同步高级设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156584876541055_zh-CN.png)
+    ![数据同步高级设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156645100341055_zh-CN.png)
 
     **说明：** 同步初始化类型细分为：结构初始化，全量数据初始化。选择**结构初始化**和**全量数据初始化**后，DTS会在增量数据同步之前，将源数据库中待同步对象的结构和存量数据，同步到目标数据库。
 
@@ -126,12 +123,12 @@
     **说明：** 
 
     -   在数据同步作业正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步作业。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156584876547468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156645100347468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
 12. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框，同步作业将正式开始。
 13. 等待同步作业的链路初始化完成，直至处于**同步中**状态。 
 
     您可以在 数据同步页面，查看数据同步作业的状态。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156584876541059_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156645100341059_zh-CN.png)
 
 
