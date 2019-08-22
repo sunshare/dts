@@ -99,12 +99,12 @@
 3.  在左侧导航栏，单击**数据同步**。
 4.  在同步作业列表页面顶部，选择数据同步实例所属地域。 
 
-    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156628891450604_zh-CN.png)
+    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156643684950604_zh-CN.png)
 
 5.  定位至已购买的数据同步实例，单击**配置同步链路**。
 6.  配置同步通道的源实例及目标实例信息。 
 
-    ![源目实例信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17127/156628891455263_zh-CN.png)
+    ![源目实例信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17127/156643684955263_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -135,7 +135,7 @@
 7.  单击页面右下角的**授权白名单并进入下一步**。
 8.  配置同步策略及对象信息。 
 
-    ![配置同步策略和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17127/156628891555267_zh-CN.png)
+    ![配置同步策略和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17127/156643684955267_zh-CN.png)
 
     |配置项目|配置说明|
     |:---|:---|
@@ -155,7 +155,7 @@
     -   选择为**否**：默认选项，支持DDL同步。
  |
     |同步操作类型|根据业务勾选需要同步的操作类型，默认情况下都处于勾选状态。|
-    |选择同步对象| 在源库对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156628891540698_zh-CN.png)将其移动至已选择对象框。
+    |选择同步对象| 在源库对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156643684940698_zh-CN.png)将其移动至已选择对象框。
 
  同步对象的选择粒度为库、表。
 
@@ -169,7 +169,7 @@
 9.  上述配置完成后，单击页面右下角的**下一步**。
 10. 设置待同步的表在目标库中类型。 
 
-    ![设置表类型](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17127/156628891555270_zh-CN.png)
+    ![设置表类型](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17127/156643684955270_zh-CN.png)
 
     **说明：** 选择了**结构初始化**后，您需要定义待同步的表在AnalyticDB for MySQL中的**类型**、主**键列**、**分区列**等信息，详情请参见创建[ADB 2.0 SQL手册](https://help.aliyun.com/document_detail/94860.html)和[ADB 3.0 SQL手册](https://help.aliyun.com/document_detail/123333.html)。
 
@@ -178,10 +178,10 @@
     **说明：** 
 
     -   在数据同步作业正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步作业。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156628891547468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156643684947468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
 12. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框，同步作业将正式开始。
 13. 等待同步作业的链路初始化完成，直至处于**同步中**状态。 您可以在 数据同步页面，查看数据同步作业的状态。
 
-    ![数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156628891541059_zh-CN.png)
+    ![数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156643684941059_zh-CN.png)
 
 
