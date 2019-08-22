@@ -9,6 +9,7 @@
 
 ## 注意事项 {#section_iaj_pbc_xyv .section}
 
+-   如果同步对象为单个或多个表（非整库），那么在数据同步时，请勿对源库的同步对象使用gh-ost或pt-online-schema-change等类似工具执行在线DDL变更，否则会导致同步失败。
 -   暂不支持中国（香港）可用区A的RDS for MySQL实例配置数据同步。
 -   目标实例不支持访问模式为标准模式且只有外网连接地址的RDS for MySQL实例。
 -   如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
@@ -63,11 +64,11 @@ RDS for MySQL实例的数据同步支持所有DML语法和部分DDL语法的同�
 3.  在左侧导航栏，单击**数据同步**。
 4.  定位至已购买的数据同步实例，单击该实例的**配置同步链路**。
 
-    ![配置MySQL单向同步任务](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17124/156592546446141_zh-CN.png)
+    ![配置MySQL单向同步任务](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17124/156643681846141_zh-CN.png)
 
 5.  配置同步通道的源实例及目标实例信息。
 
-    ![MySQL单向同步源目实例信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217806/156592546447056_zh-CN.png)
+    ![MySQL单向同步源目实例信息配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217806/156643681847056_zh-CN.png)
 
     |类别|配置项|说明|
     |:-|:--|:-|
@@ -95,7 +96,7 @@ RDS for MySQL实例的数据同步支持所有DML语法和部分DDL语法的同�
 6.  单击页面右下角的**授权白名单并进入下一步**。
 7.  配置同步策略及对象信息。
 
-    ![MySQL单向同步配置同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17124/156592546446145_zh-CN.png)
+    ![MySQL单向同步配置同步对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17124/156643681846145_zh-CN.png)
 
     |配置项目|配置说明|
     |:---|:---|
@@ -110,7 +111,7 @@ RDS for MySQL实例的数据同步支持所有DML语法和部分DDL语法的同�
 8.  上述配置完成后单击页面右下角的**下一步**。
 9.  配置同步初始化的高级配置信息。
 
-    ![数据同步高级设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156592546441055_zh-CN.png)
+    ![数据同步高级设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156643681841055_zh-CN.png)
 
     -   此步骤会将源实例中已经存在同步对象的结构及数据在目标实例中初始化，作为后续增量同步数据的基线数据。
     -   同步初始化类型细分为：结构初始化，全量数据初始化。默认情况下，需要选择**结构初始化**和**全量数据初始化**。
@@ -119,12 +120,12 @@ RDS for MySQL实例的数据同步支持所有DML语法和部分DDL语法的同�
     **说明：** 
 
     -   在数据同步任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步任务。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156592546441056_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156643681841056_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
 11. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框，该同步作业的同步任务正式开始。
 12. 等待该同步作业的链路初始化完成，直至状态处于**同步中**。
 
     您可以在 数据同步页面，查看数据同步状态。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156592546441059_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156643681841059_zh-CN.png)
 
 
