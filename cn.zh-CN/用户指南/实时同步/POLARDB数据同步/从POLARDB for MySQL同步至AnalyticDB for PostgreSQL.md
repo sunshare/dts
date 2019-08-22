@@ -51,12 +51,12 @@
 3.  在左侧导航栏，单击**数据同步**。
 4.  在同步作业列表页面顶部，选择数据同步实例所属地域。 
 
-    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156620756950604_zh-CN.png)
+    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/776198/156645110650604_zh-CN.png)
 
 5.  定位至已购买的数据同步实例，单击**配置同步链路**。
 6.  配置同步通道的源实例及目标实例信息。 
 
-    ![配置源实例和目标实例](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/156620756946871_zh-CN.png)
+    ![配置源实例和目标实例](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/156645110746871_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -67,7 +67,7 @@
     |实例地区|购买数据同步实例时选择的源POLARDB实例的地域信息，不可变更。|
     |对端专有网络|选择POLARDB实例所属的VPC ID。 您可以登录[POLARDB控制台](https://polardb.console.aliyun.com/)，单击目标实例ID，进入该实例的**基本信息**页面来获取。
 
- ![获取VPC Id](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1227086/156620756954382_zh-CN.png)
+ ![获取VPC Id](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1227086/156645110754382_zh-CN.png)
 
 |
     |数据库类型|固定为**MySQL**，不可变更。|
@@ -96,7 +96,7 @@
 
 8.  配置同步策略及对象信息。 
 
-    ![配置同步策略和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/156620756946872_zh-CN.png)
+    ![配置同步策略和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217462/156645110746872_zh-CN.png)
 
     |类别项目|选项|说明|
     |:---|:-|:-|
@@ -134,12 +134,12 @@
     **说明：** 
 
     -   在数据同步作业正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步作业。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156620757047468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156645110747468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
 10. 在预检查对话框中显示**预检查通过**后，关闭预检查对话框，同步作业将正式开始。
 11. 等待同步作业的链路初始化完成，直至处于**同步中**状态。 
 
     您可以在 数据同步页面，查看数据同步作业的状态。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156620757041059_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17125/156645110741059_zh-CN.png)
 
 
