@@ -10,7 +10,7 @@
 
 ## 注意事项 {#section_i61_85r_qaa .section}
 
--   请勿在数据同步时，对源库的同步对象使用gh-ost或pt-online-schema-change等类似工具执行在线DDL变更，否则会导致同步失败。
+-   如果同步对象为单个或多个表（非整库），那么在数据同步时，请勿对源库的同步对象使用gh-ost或pt-online-schema-change等类似工具执行在线DDL变更，否则会导致同步失败。
 -   如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
 
 ## 数据同步功能限制 {#section_dwq_cwz_nhb .section}
@@ -59,7 +59,7 @@
 4.  定位至已购买的数据同步实例，单击**配置同步链路**。
 5.  配置同步通道的源实例及目标实例信息。
 
-    ![配置数据同步的源库和目标库信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/189990/156620048146062_zh-CN.png)
+    ![配置数据同步的源库和目标库信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/189990/156643694046062_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -87,7 +87,7 @@
 6.  单击页面右下角的**授权白名单并进入下一步**。
 7.  配置同步策略及对象信息。
 
-    ![配置同步策略和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156620048145690_zh-CN.png)
+    ![配置同步策略和对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156643694145690_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -125,12 +125,12 @@
     **说明：** 
 
     -   在数据同步任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动数据同步任务。
-    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156620048145708_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156643694145708_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
 9.  在预检查对话框中显示**预检查通过**后，关闭预检查对话框，该同步作业的同步任务正式开始。
 10. 等待该同步作业的链路初始化完成，直至状态处于**同步中**。
 
     您可以在 数据同步页面，查看数据同步状态。
 
-    ![数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156620048145691_zh-CN.png)
+    ![数据同步状态](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/188230/156643694145691_zh-CN.png)
 
 
