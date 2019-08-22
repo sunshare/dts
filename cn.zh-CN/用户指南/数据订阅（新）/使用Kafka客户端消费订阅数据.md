@@ -4,7 +4,7 @@
 
 ## 前提条件 {#section_p9u_awf_ddf .section}
 
--   已创建数据订阅通道，详情请参见[创建RDS for MySQL数据订阅通道（新版）](cn.zh-CN/用户指南/数据订阅（新）/创建RDS for MySQL数据订阅通道（新版）.md#)、[创建POLARDB for MySQL数据订阅通道](cn.zh-CN/用户指南/数据订阅（新）/创建POLARDB for MySQL数据订阅通道.md#)或[创建Oracle数据订阅通道](cn.zh-CN/.md#)。
+-   已创建数据订阅通道，详情请参见[创建RDS for MySQL数据订阅通道（新版）](cn.zh-CN/用户指南/数据订阅（新）/创建RDS for MySQL数据订阅通道（新版）.md#)或[创建POLARDB for MySQL数据订阅通道](cn.zh-CN/用户指南/数据订阅（新）/创建POLARDB for MySQL数据订阅通道.md#)。
 -   已创建消费组，详情请参见[新增消费组](cn.zh-CN/用户指南/数据订阅（新）/新增消费组.md#)。
 
 ## Kafka客户端Demo代码下载 {#section_7nm_4fm_7s8 .section}
@@ -63,7 +63,7 @@
 4.  定位目标数据订阅通道，单击该订阅ID。
 5.  在订阅配置页面，您将获取到**订阅Topic**和**网络**信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156636458848804_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156643614048804_zh-CN.png)
 
     **说明：** 
 
@@ -71,7 +71,7 @@
     -   如果您部署Kafka Client的ECS实例与数据订阅通道属于同一经典网络或同一专有网络，建议通过内网地址进行数据订阅，网络延迟最小。
 6.  在左侧导航栏，单击**数据消费**，您将获取到**消费组ID**和对应的**账号**信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156636458848805_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/408280/156643614048805_zh-CN.png)
 
     **说明：** 如果忘记消费组密码，您可以[修改消费组密码](cn.zh-CN/用户指南/数据订阅（新）/管理消费组.md#section_isf_puz_17u)。
 
