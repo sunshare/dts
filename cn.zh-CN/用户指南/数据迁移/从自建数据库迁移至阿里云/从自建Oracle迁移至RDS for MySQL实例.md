@@ -82,40 +82,7 @@
 
 ## 数据类型映射关系 {#section_g54_p1r_5hb .section}
 
-由于Oracle和MySQL的数据类型并不是一一对应的，所以DTS在进行结构迁移时，会根据数据类型定义进行类型映射，数据类型映射关系如下表所示。
-
-|Oracle 数据类型|MySQL 数据类型|DTS 是否支持|
-|:----------|:---------|:-------|
-|varchar2\(n \[char/byte\]\)|varchar\(n\)|支持|
-|nvarchar2\[\(n\)\]|national varchar\[\(n\)\]|支持|
-|char\[\(n \[byte/char\]\)\]|char\[\(n\)\]|支持|
-|nchar\[\(n\)\]|national char\[\(n\)\]|支持|
-|number\[\(p\[,s\]\)\]|decimal\[\(p\[,s\]\)\]|支持|
-|float\(p\)\]|double|支持|
-|long|longtext|支持|
-|date|datetime|支持|
-|binary\_float|decimal\(65,8\)|支持|
-|binary\_double|double|支持|
-|timestamp\[\(fractional\_seconds\_precision\)\]|datetime\[\(fractional\_seconds\_precision\)\]|支持|
-|timestamp\[\(fractional\_seconds\_precision\)\]with localtimezone|datetime\[\(fractional\_seconds\_precision\)\]|支持|
-|timestamp\[\(fractional\_seconds\_precision\)\]with localtimezone|datetime\[\(fractional\_seconds\_precision\)\]|支持|
-|clob|longtext|支持|
-|nclob|longtext|支持|
-|blob|longblob|支持|
-|raw|varbinary\(2000\)|支持|
-|long raw|longblob|支持|
-|bfile|-|**不支持**|
-|interval year\(year\_precision\) to month|-|**不支持**|
-|interval day\(day\_precision\)to second\[\(fractional\_seconds\_precision\)\]|-|**不支持**|
-
-**说明：** 
-
--   对于char类型，当长度定义超过255时，DTS会将类型转换为varchar\(n\)。
--   由于MySQL本身不支持类似Oracle中的bfile、interval year to month和interval day tosecond数据类型，DTS在进行结构迁移时，无法在MySQL中找到合适的数据类型进行映射，因此这三种类型不会进行转化。
-
-    迁移时如果表中含有这三种类型，会导致结构迁移失败，在选择迁移对象时，对需要迁移的对象中这三种类型的列进行排除。
-
--   由于MySQL的timestamp类型不包含时区，而Oracle的timestamp with time zone和timestamp with local time zone默认带有时区信息，DTS在迁移这两种类型的数据时，会将其转换成UTC时区后存入目标RDS for MySQL实例。
+详情请参见[异构数据库间的数据类型映射关系](cn.zh-CN/用户指南/数据迁移/异构数据库间的数据类型映射关系.md#)。
 
 ## 操作步骤 {#section_sff_dcr_5hb .section}
 
@@ -123,12 +90,12 @@
 2.  在左侧导航栏，单击**数据迁移**。
 3.  在迁移任务列表页面顶部，选择迁移的目标实例所属地域。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156523492950439_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156653899650439_zh-CN.png)
 
 4.  单击页面右上角的**创建迁移任务**。
 5.  配置迁移任务的源库及目标库信息。
 
-    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156523492947598_zh-CN.png)
+    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653899647598_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -163,7 +130,7 @@
 
 7.  选择迁移对象及迁移类型。
 
-    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156523493047602_zh-CN.png)
+    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653900047602_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -173,7 +140,7 @@
 
     -   如果需要进行不停机迁移，同时勾选**结构迁移**、**全量数据迁移**和**增量数据迁移**。
  |
-    |迁移对象| 在迁移对象框中选中待迁移的对象，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156523493040698_zh-CN.png)将其移动到已选择对象框。
+    |迁移对象| 在迁移对象框中选中待迁移的对象，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156653900140698_zh-CN.png)将其移动到已选择对象框。
 
  **说明：** 
 
@@ -186,7 +153,7 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156523493047468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156653900147468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
 9.  预检查通过后，单击**下一步**。
 10. 在购买配置确认页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 11. 单击**购买并启动**，迁移任务正式开始。
@@ -203,7 +170,7 @@
         1.  观察迁移任务的进度变更为**增量迁移**，并显示为**无延迟**状态时，将源库停写几分钟，此时**增量迁移**的状态可能会显示延迟的时间。
         2.  等待迁移任务的**增量迁移**再次进入**无延迟**状态后，手动结束迁移任务。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156523493047604_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653900147604_zh-CN.png)
 
 12. 将业务切换至RDS实例。
 
