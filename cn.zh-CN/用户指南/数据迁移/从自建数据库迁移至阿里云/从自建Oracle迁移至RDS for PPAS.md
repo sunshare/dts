@@ -73,35 +73,9 @@
 -   自建Oracle数据库请参见[CREATE USER](https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_8003.htm)和[GRANT](https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_9013.htm)。
 -   RDS for PPAS实例请参见[创建账号](https://help.aliyun.com/document_detail/96933.html)。
 
-## 数据类型映射关系 {#section_bhf_hqm_fi1 .section}
+## 数据类型映射关系 {#section_do6_r3v_hea .section}
 
-由于Oracle和PPAS的数据类型并不是一一对应的，所以DTS在进行结构迁移时，会根据数据类型定义进行类型映射，数据类型映射关系如下表所示。
-
-|Oracle数据类型|PPAS数据类型|DTS是否支持|
-|:---------|:-------|:------|
-|varchar2\(n \[char/byte\]\)|varchar2\[\(n\)\]|支持|
-|nvarchar2\[\(n\)\]|nvarchar2\[\(n\)\]|支持|
-|char\[\(n \[byte/char\]\)\]|char\[\(n\)\]|支持|
-|nchar\[\(n\)\]|nchar\[\(n\)\]|支持|
-|number\[\(p\[,s\]\)\]|number\[\(p\[,s\]\)\]|支持|
-|float\(p\)\]|double precision|支持|
-|long|long|支持|
-|date|date|支持|
-|binary\_float|real|支持|
-|binary\_double|double precision|支持|
-|timestamp\[\(fractional\_seconds\_precision\)\]|timestamp\[\(fractional\_seconds\_precision\)\]|支持|
-|timestamp\[\(fractional\_seconds\_precision\)\]with time zone|timestamp\[\(fractional\_seconds\_precision\)\]with time zone|支持|
-|timestamp\[\(fractional\_seconds\_precision\)\]with local time zone|timestamp\[\(fractional\_seconds\_precision\)\]with time zone|支持|
-|clob|clob|支持|
-|nclob|nclob|支持|
-|blob|blob|支持|
-|raw|raw\(size\)|支持|
-|long raw|long raw|支持|
-|bfile|-|**不支持**|
-|interval year\(year\_precision\) to month|interval year to month|**不支持**|
-|interval day\(day\_precision\) to second\[\(fractional\_seconds\_precision\)\]|interval day to second\[\(fractional\_seconds\_precision\)\]|**不支持**|
-
-**说明：** 由于RDS for PPAS不支持timestamp\[\(fractional\_seconds\_precision\)\]with local time zone，DTS在迁移这种类型的数据时，会将其转换成UTC时区后存入目标RDS for PPAS的timestamp\[\(fractional\_seconds\_precision\)\]with time zone中。
+详情请参见[异构数据库间的数据类型映射关系](cn.zh-CN/用户指南/数据迁移/异构数据库间的数据类型映射关系.md#)。
 
 ## 操作步骤 {#section_j8n_qo1_7ay .section}
 
@@ -109,12 +83,12 @@
 2.  在左侧导航栏，单击**数据迁移**。
 3.  在迁移任务列表页面顶部，选择迁移的目标实例所属地域。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156523496150439_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156653904950439_zh-CN.png)
 
 4.  单击页面右上角的**创建迁移任务**。
 5.  配置迁移任务的源库及目标库信息。
 
-    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156523496147598_zh-CN.png)
+    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653905047598_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -150,7 +124,7 @@
 
 7.  选择迁移对象及迁移类型。
 
-    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156523496247602_zh-CN.png)
+    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653905147602_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -165,7 +139,7 @@
         -   增量数据迁移只支持有主键，或有非空唯一索引的表。
         -   增量数据迁移不支持long类型。
  |
-    |迁移对象| 在迁移对象框中将想要迁移的数据库选中，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156523496240698_zh-CN.png)移动到已选择对象框。
+    |迁移对象| 在迁移对象框中将想要迁移的数据库选中，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156653905340698_zh-CN.png)移动到已选择对象框。
 
  **说明：** 
 
@@ -179,7 +153,7 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156523496247468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156653905347468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
 9.  预检查通过后，单击**下一步**。
 10. 在购买配置确认页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 11. 单击**购买并启动**，迁移任务正式开始。
@@ -196,7 +170,7 @@
         1.  观察迁移任务的进度变更为**增量迁移**，并显示为**无延迟**状态时，将源库停写几分钟，此时**增量迁移**的状态可能会显示延迟的时间。
         2.  等待迁移任务的**增量迁移**再次进入**无延迟**状态后，手动结束迁移任务。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156523496247604_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653905347604_zh-CN.png)
 
 12. 将业务切换至RDS for PPAS数据库。
 
