@@ -67,36 +67,7 @@
 
 根据自建Oracle数据库中待迁移数据表的数据结构，在目标DRDS实例中创建相应的数据库和数据表，详情请参见[创建数据库](https://help.aliyun.com/document_detail/52090.html)和[SQL基本操作](https://help.aliyun.com/document_detail/117763.html)。
 
-由于Oracle和DRDS实例的数据类型并不是一一对应的，您需要在DRDS实例中定义对应的数据类型，具体如下表所示。
-
-|Oracle数据类型|DRDS数据类型|DTS是否支持|
-|:---------|:-------|:------|
-|varchar2\(n \[char/byte\]\)|varchar\(n\)|支持|
-|nvarchar2\[\(n\)\]|national varchar\[\(n\)\]|支持|
-|char\[\(n \[byte/char\]\)\]|char\[\(n\)\]|支持|
-|nchar\[\(n\)\]|national char\[\(n\)\]|支持|
-|number\[\(p\[,s\]\)\]|decimal\[\(p\[,s\]\)\]|支持|
-|float\(p\)\]|double|支持|
-|long|longtext|支持|
-|date|datetime|支持|
-|binary\_float|decimal\(65,8\)|支持|
-|binary\_double|double|支持|
-|timestamp\[\(fractional\_seconds\_precision\)\]|datetime\[\(fractional\_seconds\_precision\)\]|支持|
-|timestamp\[\(fractional\_seconds\_precision\)\]with localtimezone|datetime\[\(fractional\_seconds\_precision\)\]|支持|
-|timestamp\[\(fractional\_seconds\_precision\)\]with localtimezone|datetime\[\(fractional\_seconds\_precision\)\]|支持|
-|clob|longtext|支持|
-|nclob|longtext|支持|
-|blob|longblob|支持|
-|raw|varbinary\(2000\)|支持|
-|long raw|longblob|支持|
-|bfile|-|**不支持**|
-|interval year\(year\_precision\) to month|-|**不支持**|
-|interval day\(day\_precision\)to second\[\(fractional\_seconds\_precision\)\]|-|**不支持**|
-
-**说明：** 
-
--   对于char类型，如果长度定义超过255，需要在DRDS中对应定义为varchar\(n\)。
--   由于DRDS实例的timestamp类型不包含时区，而Oracle的timestamp with time zone和timestamp with local time zone默认带有时区信息，DTS在迁移这两种类型的数据时，会将其转换成UTC时区后存入目标DRDS实例。
+**说明：** 由于Oracle和DRDS实例的数据类型并不是一一对应的，您需要在DRDS实例中定义对应的数据类型，详情请参见[异构数据库间的数据类型映射关系](cn.zh-CN/用户指南/数据迁移/异构数据库间的数据类型映射关系.md#)。
 
 ## 操作步骤 {#section_f49_bmt_87d .section}
 
@@ -104,12 +75,12 @@
 2.  在左侧导航栏，单击**数据迁移**。
 3.  在迁移任务列表页面顶部，选择迁移的目标实例所属地域。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156523494650439_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156653902350439_zh-CN.png)
 
 4.  单击页面右上角的**创建迁移任务**。
 5.  配置迁移任务的源库及目标库信息。
 
-    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17108/156523494647826_zh-CN.png)
+    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17108/156653902447826_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -144,7 +115,7 @@
 
 7.  选择迁移对象及迁移类型。
 
-    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156523494647602_zh-CN.png)
+    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653902547602_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -154,7 +125,7 @@
 
     -   如果需要进行不停机迁移，则同时勾选**全量数据迁移**和**增量数据迁移**。
  |
-    |迁移对象| 在迁移对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156523494640698_zh-CN.png)将其移动至已选择对象框。
+    |迁移对象| 在迁移对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156653902640698_zh-CN.png)将其移动至已选择对象框。
 
  **说明：** 
 
@@ -168,7 +139,7 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156523494747468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156653902647468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
 9.  预检查通过后，单击**下一步**。
 10. 在购买配置确认页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 11. 单击**购买并启动**，迁移任务正式开始。
@@ -185,7 +156,7 @@
         1.  观察迁移任务的进度变更为**增量迁移**，并显示为**无延迟**状态时，将源库停写几分钟，此时**增量迁移**的状态可能会显示延迟的时间。
         2.  等待迁移任务的**增量迁移**再次进入**无延迟**状态后，手动结束迁移任务。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156523494747604_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653902647604_zh-CN.png)
 
 12. 将业务切换至DRDS实例。
 
