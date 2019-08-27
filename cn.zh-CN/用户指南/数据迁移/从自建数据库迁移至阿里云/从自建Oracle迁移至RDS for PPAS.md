@@ -83,12 +83,12 @@
 2.  在左侧导航栏，单击**数据迁移**。
 3.  在迁移任务列表页面顶部，选择迁移的目标实例所属地域。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156653904950439_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156687084550439_zh-CN.png)
 
 4.  单击页面右上角的**创建迁移任务**。
 5.  配置迁移任务的源库及目标库信息。
 
-    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653905047598_zh-CN.png)
+    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17109/156687084657893_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -112,7 +112,7 @@
     |目标库信息|实例类型|选择**RDS实例**。|
     |实例地区|选择目标RDS for PPAS实例所属地域。|
     |RDS实例ID|选择目标RDS for PPAS实例ID。|
-    |数据库名称|填入待迁移的目标数据库名称。|
+    |数据库名称|填入迁移的目标数据库名称。|
     |数据库账号|填入连接目标RDS for PPAS实例数据库的账号，权限要求请参见[迁移账号权限要求](#section_bjn_5zq_5hb)。|
     |数据库密码|填入连接目标RDS for PPAS实例数据库账号对应的密码。 **说明：** 目标库信息填写完毕后，您可以单击**数据库密码**后的**测试连接**来验证填入的目标库信息是否正确。目标库信息填写正确则提示**测试通过**，如提示**测试失败**，单击**测试失败**后的**诊断**，根据提示调整填写的目标库信息。
 
@@ -124,7 +124,7 @@
 
 7.  选择迁移对象及迁移类型。
 
-    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653905147602_zh-CN.png)
+    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156687084747602_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -139,7 +139,7 @@
         -   增量数据迁移只支持有主键，或有非空唯一索引的表。
         -   增量数据迁移不支持long类型。
  |
-    |迁移对象| 在迁移对象框中将想要迁移的数据库选中，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156653905340698_zh-CN.png)移动到已选择对象框。
+    |迁移对象| 在迁移对象框中将想要迁移的数据库选中，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156687084940698_zh-CN.png)移动到已选择对象框。
 
  **说明：** 
 
@@ -153,7 +153,7 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156653905347468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156687084947468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
 9.  预检查通过后，单击**下一步**。
 10. 在购买配置确认页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 11. 单击**购买并启动**，迁移任务正式开始。
@@ -170,7 +170,7 @@
         1.  观察迁移任务的进度变更为**增量迁移**，并显示为**无延迟**状态时，将源库停写几分钟，此时**增量迁移**的状态可能会显示延迟的时间。
         2.  等待迁移任务的**增量迁移**再次进入**无延迟**状态后，手动结束迁移任务。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653905347604_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156687084947604_zh-CN.png)
 
 12. 将业务切换至RDS for PPAS数据库。
 
