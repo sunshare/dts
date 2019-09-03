@@ -4,7 +4,8 @@
 
 |版本|更新内容|下载地址|
 |:-|:---|:---|
-|2.0.15|支持配置监控报警功能| -   [Java](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/120287/cn_zh/1567489209350/aliyun-java-sdk-dts-2.0.15.jar)
+|2.0.16|修复已知问题。|[Java](https://sdk-release2.oss-cn-hangzhou.aliyuncs.com/tarfiles/aliyun-java-sdk-dts-2.0.16.jar)|
+|2.0.15|支持配置监控报警功能。| -   [Java](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/120287/cn_zh/1567489209350/aliyun-java-sdk-dts-2.0.15.jar)
 -   [Python](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/120287/cn_zh/1567489269310/aliyun-python-sdk-dts-2.0.15.tar.gz)
 
  |
