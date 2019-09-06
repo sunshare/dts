@@ -38,7 +38,7 @@ POLARDB是阿里巴巴自主研发的下一代关系型分布式云原生数据�
 |源POLARDB for MySQL|待迁移对象的读权限|
 |目标POLARDB for MySQL|迁移对象的读写权限|
 
-**说明：** 关于数据库账号的创建和授权方法，请参见[创建POLARDB数据库账号](https://help.aliyun.com/document_detail/68508.html?spm=a2c4g.11186623.2.10.3f657dd3d4orj4)。
+**说明：** 关于数据库账号的创建和授权方法，请参见[创建POLARDB数据库账号](https://help.aliyun.com/document_detail/68508.html)。
 
 ## 操作步骤 {#section_yc6_fkw_zyy .section}
 
@@ -46,12 +46,12 @@ POLARDB是阿里巴巴自主研发的下一代关系型分布式云原生数据�
 2.  在左侧导航栏，单击**数据迁移**。
 3.  在迁移任务列表页面顶部，选择迁移的目标集群所属地域。 
 
-    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156707213650439_zh-CN.png)
+    ![选择地域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156774846750439_zh-CN.png)
 
 4.  单击页面右上角的**创建迁移任务**。
 5.  配置迁移任务的源库和目标库连接信息。 
 
-    ![配置源库和目标库连接信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1436590/156707213656870_zh-CN.png)
+    ![配置源库和目标库连接信息](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1436590/156774846756870_zh-CN.png)
 
     |配置项目|配置选项|配置说明|
     |:---|:---|:---|
@@ -77,7 +77,7 @@ POLARDB是阿里巴巴自主研发的下一代关系型分布式云原生数据�
 
 7.  选择迁移类型和迁移对象。 
 
-    ![选择迁移对象和类型](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1436590/156707213656880_zh-CN.png)
+    ![选择迁移对象和类型](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1436590/156774846756880_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -87,7 +87,7 @@ POLARDB是阿里巴巴自主研发的下一代关系型分布式云原生数据�
 
     -   如果需要进行不停机迁移，则同时勾选**结构迁移**、**全量数据迁移**和**增量数据迁移**。
  |
-    |迁移对象| 在迁移对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156707213640698_zh-CN.png)将其移动至已选择对象框。
+    |迁移对象| 在迁移对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156774846840698_zh-CN.png)将其移动至已选择对象框。
 
  **说明：** 
 
@@ -101,7 +101,7 @@ POLARDB是阿里巴巴自主研发的下一代关系型分布式云原生数据�
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有通过预检查，DTS才能迁移数据。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156707213647468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156774846847468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
 9.  预检查通过后，单击**下一步**。
 10. 在弹出的购买配置确认对话框，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 11. 单击**购买并启动**，迁移任务正式开始。 
@@ -118,7 +118,7 @@ POLARDB是阿里巴巴自主研发的下一代关系型分布式云原生数据�
         1.  观察迁移任务的进度变更为**增量迁移**，并显示为**无延迟**状态时，将源库停写几分钟，此时**增量迁移**的状态可能会显示延迟的时间。
         2.  等待迁移任务的**增量迁移**再次进入**无延迟**状态后，手动结束迁移任务。
 
-            ![结束增量迁移任务](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156707213647604_zh-CN.png)
+            ![结束增量迁移任务](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156774846847604_zh-CN.png)
 
 12. 将业务切换至POLARDB集群。
 
