@@ -5,7 +5,7 @@ DTS的数据迁移功能支持同构或异构数据源之间的数据迁移，�
 |迁移场景|源库类型|文档链接|
 |:---|:---|:---|
 |从自建数据库迁移至阿里云|MySQL|[从自建MySQL迁移至RDS for MySQL](cn.zh-CN/用户指南/数据迁移/从自建数据库迁移至阿里云/从自建MySQL迁移至RDS for MySQL.md#)|
-|[从自建MySQL迁移至POLARDB](cn.zh-CN/用户指南/数据迁移/从自建数据库迁移至阿里云/将ECS上的自建MySQL迁移至POLARDB实例.md#)|
+|[从自建MySQL迁移至POLARDB](cn.zh-CN/用户指南/数据迁移/从自建数据库迁移至阿里云/从自建MySQL迁移至POLARDB for MySQL.md#)|
 |[从自建MySQL迁移至DRDS](cn.zh-CN/用户指南/数据迁移/从自建数据库迁移至阿里云/从自建MySQL迁移至DRDS.md#)|
 |SQL Server|[从自建SQL Server增量迁移至RDS for SQL Server](cn.zh-CN/用户指南/数据迁移/从自建数据库迁移至阿里云/从自建SQL Server增量迁移至RDS for SQL Server.md#)|
 |[从自建SQL Server全量迁移至RDS for SQL Server](cn.zh-CN/用户指南/数据迁移/从自建数据库迁移至阿里云/从自建SQL Server全量迁移至RDS for SQL Server.md#)|
@@ -19,7 +19,7 @@ DTS的数据迁移功能支持同构或异构数据源之间的数据迁移，�
 |[从副本集架构的自建MongoDB迁移至阿里云](https://help.aliyun.com/document_detail/125258.html)|
 |[从分片集群架构的自建MongoDB迁移至阿里云](https://help.aliyun.com/document_detail/125259.html)|
 |DB2|[从自建DB2迁移至RDS for MySQL](cn.zh-CN/.md#)|
-|从第三方云迁移至阿里云|Amazon RDS|[从Amazon RDS for MySQL至阿里云](cn.zh-CN/用户指南/数据迁移/从第三方云迁移至阿里云/从Amazon RDS for MySQL至阿里云.md#)|
+|从第三方云迁移至阿里云|Amazon RDS|[从Amazon RDS for MySQL迁移至阿里云](cn.zh-CN/用户指南/数据迁移/从第三方云迁移至阿里云/从Amazon RDS for MySQL迁移至阿里云.md#)|
 |[从Amazon RDS for Oracle迁移至阿里云RDS for MySQL](cn.zh-CN/用户指南/数据迁移/从第三方云迁移至阿里云/从Amazon RDS for Oracle迁移至阿里云RDS for MySQL.md#)|
 |[从Amazon RDS for Oracle迁移至阿里云RDS for PPAS](cn.zh-CN/用户指南/数据迁移/从第三方云迁移至阿里云/从Amazon RDS for Oracle迁移至阿里云RDS for PPAS.md#)|
 |[从Amazon RDS for PostgreSQL迁移至阿里云](cn.zh-CN/用户指南/数据迁移/从第三方云迁移至阿里云/从Amazon RDS for PostgreSQL迁移至阿里云.md#)|
