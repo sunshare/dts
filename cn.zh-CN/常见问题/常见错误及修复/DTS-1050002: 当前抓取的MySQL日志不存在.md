@@ -1,8 +1,6 @@
 # DTS-1050002: 当前抓取的MySQL日志不存在 {#concept_sjd_dkf_2fb .concept}
 
-当DTS提示
-
-DTS 当前抓取的MySQL日志不存在
+本文为您介绍当DTS提示当前抓取的MySQL日志不存在的错误，可能的原因和解决方法。
 
 ## 报错信息 {#section_pkr_2lj_ayv .section}
 
