@@ -112,7 +112,7 @@ There are some differences between MySQL and Oracle data types. Therefore, DTS m
 2.  Go to the Basic Information page of the source Amazon RDS for Oracle instance.
 3.  In the Security group rules section, click the name of the security group corresponding to the existing inbound rule.
 
-    ![Security group rules](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156808296541899_en-US.png)
+    ![Security group rules](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156808315041899_en-US.png)
 
 4.  On the Security Groups page, click the Inbound tab in the Security Group section. On the Inbound tab, click Edit to add IP address ranges of the DTS server in the corresponding region to the inbound rule. For more information about the IP address ranges, see [DTS IP address ranges](https://www.alibabacloud.com/help/doc-detail/84900.htm).
 
@@ -120,7 +120,7 @@ There are some differences between MySQL and Oracle data types. Therefore, DTS m
 
     -   You only need to add the DTS IP address ranges corresponding to the region where the destination database is located. In this case, the source database is located in Singapore and the destination database is located in Hangzhou. You only need to add the DTS IP address ranges corresponding to China \(Hangzhou\).
     -   You can add the required IP address ranges to the inbound rule at one time.
-    ![Edit AWS inbound rules](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156808296541849_en-US.png)
+    ![Edit AWS inbound rules](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/287980/156808315047942_en-US.png)
 
 5.  Adjust log configuration of Amazon RDS for Oracle. Skip this step if you do not need to perform **incremental data migration**.
     1.  Use the Master User account and the SQL\*Plus tool provided by Oracle to connect to the Amazon RDS for Oracle database.
@@ -168,7 +168,7 @@ There are some differences between MySQL and Oracle data types. Therefore, DTS m
 3.  In the upper-right corner, click **Create Migration Task**.
 4.  Configure the parameters of **Source and Destination Databases**.
 
-    ![Configure Source and Destination Databases](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156808296547598_en-US.png)
+    ![Configure Source and Destination Databases](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156808315047598_en-US.png)
 
     |Category|Parameter|Description|
     |:-------|:--------|:----------|
@@ -182,9 +182,7 @@ There are some differences between MySQL and Oracle data types. Therefore, DTS m
     |Database Type|Select **Oracle**.|
     |Hostname or IP Address|Enter the URL of the Amazon RDS for Oracle database. **Note:** You can query the database connection information on the Basic Information page of Amazon RDS for Oracle.
 
- ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156808296541853_en-US.png)
-
-![Connection Address](images/47946_en-US.png)
+ ![Connection Address](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/287980/156808315047946_en-US.png)
 
 |
     |Port Number|Enter the port of the Amazon RDS for Oracle database. The default value is **1521**.|
@@ -207,11 +205,11 @@ There are some differences between MySQL and Oracle data types. Therefore, DTS m
 
 5.  After the configuration is complete, click **Set Whitelist and Next** in the lower-right corner.
 
-    **Note:** The IP address of the DTS server is automatically added to the whitelist of the destination RDS instance. This ensures that the DTS server can connect to the destination instance. After the migration is complete, you can delete the IP address of the DTS server from the whitelist if you no longer need it. For more information, see [Configure a whitelist](https://help.aliyun.com/document_detail/43185.html).
+    **Note:** The IP address of the DTS server is automatically added to the whitelist of the destination RDS instance. This ensures that the DTS server can connect to the destination instance. After the migration is complete, you can delete the IP address of the DTS server from the whitelist if you no longer need it. For more information, see [Configure a whitelist](https://www.alibabacloud.com/help/doc-detail/43185.htm).
 
 6.  Configure migration objects and types.
 
-    ![Configure Migration Types and Objects](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156808296547602_en-US.png)
+    ![Configure Migration Types and Objects](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156808315047602_en-US.png)
 
     |Parameter|Description|
     |:--------|:----------|
@@ -221,7 +219,7 @@ There are some differences between MySQL and Oracle data types. Therefore, DTS m
 
     -   If you need to migrate the data without stopping your business, select **Schema Migration**, **Full Data Migration**, and **Incremental Data Migration**.
  |
-    |Available| Select the database to be migrated from the Available section, and click the ![>](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156808296540698_en-US.png) icon to move the database to the Selected section.
+    |Available| Select the database to be migrated from the Available section, and click the ![>](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156808315040698_en-US.png) icon to move the database to the Selected section.
 
  **Note:** 
 
@@ -249,7 +247,7 @@ There are some differences between MySQL and Oracle data types. Therefore, DTS m
         1.  When the status of the migration task is **The migration task is not delayed**, stop writing data to the source database for several minutes. The latency may be displayed.
         2.  When the status of the migration task becomes **The migration task is not delayed** again, stop the migration task manually.
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156808296547604_en-US.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156808315047604_en-US.png)
 
         3.  Migrate business to the RDS instance.
 
