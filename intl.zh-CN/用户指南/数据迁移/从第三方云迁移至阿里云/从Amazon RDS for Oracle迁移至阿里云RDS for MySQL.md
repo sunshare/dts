@@ -17,10 +17,10 @@
 -   如果源数据库没有主键或唯一约束，且所有字段没有唯一性，可能会导致目标数据库中出现重复数据。
 -   RDS for MySQL实例对表名的英文大小写不敏感，如果使用大写英文建表，RDS for MySQL会先把表名转为小写再执行建表操作。
 
-    如果源Oracle数据库中存在表名相同仅大小写不同的表，可能会导致迁移对象重名并在结构迁移中提示“对象已经存在”。如果出现这种情况，请在配置迁移对象的时候，使用DTS提供的对象名映射功能对重名的对象进行重命名，详情请参见[库表列映射](https://help.aliyun.com/document_detail/26628.html)。
+    如果源Oracle数据库中存在表名相同仅大小写不同的表，可能会导致迁移对象重名并在结构迁移中提示“对象已经存在”。如果出现这种情况，请在配置迁移对象的时候，使用DTS提供的对象名映射功能对重名的对象进行重命名，详情请参见[库表列映射](https://www.alibabacloud.com/help/zh/doc-detail/26628.htm)。
 
--   如果待迁移的数据库在目标RDS for MySQL实例中不存在，DTS会自动创建。但是对于如下两种情况，用户需要在配置迁移任务之前在目标RDS for MySQL实例中[创建数据库](https://help.aliyun.com/document_detail/96105.html)。
-    -   数据库名称不符合RDS定义规范，详细规范请参见[创建数据库](https://help.aliyun.com/document_detail/96105.html)。
+-   如果待迁移的数据库在目标RDS for MySQL实例中不存在，DTS会自动创建。但是对于如下两种情况，用户需要在配置迁移任务之前在目标RDS for MySQL实例中[创建数据库](https://www.alibabacloud.com/help/zh/doc-detail/87038.htm)。
+    -   数据库名称不符合RDS定义规范，详细规范请参见[创建数据库](https://www.alibabacloud.com/help/zh/doc-detail/87038.htm)。
     -   待迁移数据库在源Oracle数据库与目标RDS for MySQL实例中的名称不同。
 
 ## 费用说明 {#section_md8_hm9_8ox .section}
@@ -66,7 +66,7 @@
 **数据库账号创建及授权方法：**
 
 -   Amazon RDS for Oracle数据库请参见[CREATE USER](https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_8003.htm)和[GRANT](https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_9013.htm)。
--   RDS for MySQL实例请参见[创建账号](https://help.aliyun.com/document_detail/96089.html)和[修改账号权限](https://help.aliyun.com/document_detail/96101.html)。
+-   RDS for MySQL实例请参见[创建和管理账号](https://www.alibabacloud.com/help/zh/doc-detail/87038.htm)。
 
 ## 数据类型映射关系 {#section_8mi_nzd_9af .section}
 
@@ -112,7 +112,7 @@
 2.  进入Amazon RDS for Oracle实例的基本信息页面。
 3.  在安全组规则区域框，单击入站规则对应的安全组名称。
 
-    ![安全组规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156808369341899_zh-CN.png)
+    ![安全组规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156817257341899_zh-CN.png)
 
 4.  在安全组设置页面，将对应区域的DTS服务器地址添加至入站规则中，IP地址段详情请参见[DTS IP地址段](https://help.aliyun.com/document_detail/84900.html)。
 
@@ -120,7 +120,7 @@
 
     -   您只需添加目标数据库所在区域对应的DTS IP地址段。本案例中，源数据库地区为新加坡，目标数据库地区为杭州，您只需要添加杭州地区的DTS IP地址段。
     -   在加入IP地址段时，您可以一次性添加所需的IP地址，无需逐条添加入站规则。
-    ![编辑AWS入站规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/287980/156808369347942_zh-CN.png)
+    ![编辑AWS入站规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/287980/156817257347942_zh-CN.png)
 
 5.  调整Amazon RDS for Oracle日志配置。如您不需要**增量数据迁移**可跳过本步骤。
     1.  使用Master User账号，通过SQL\*Plus工具连接Amazon RDS for Oracle数据库。
@@ -168,7 +168,7 @@
 3.  单击页面右上角的**创建迁移任务**。
 4.  配置迁移任务的**源库及目标库**信息。
 
-    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156808369347598_zh-CN.png)
+    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156817257347598_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -182,7 +182,7 @@
     |数据库类型|选择**Oracle**。|
     |主机名或IP地址|填入Amazon RDS for Oracle数据库的访问地址。 **说明：** 您可以在Amazon RDS for Oracle的基本信息页面，获取数据库的连接信息。
 
- ![连接地址](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/287980/156808369347946_zh-CN.png)
+ ![连接地址](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/287980/156817257347946_zh-CN.png)
 
 |
     |端口|填入Amazon RDS for Oracle数据库的服务端口，默认为**1521**。|
@@ -209,7 +209,7 @@
 
 6.  选择迁移对象及迁移类型。
 
-    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156808369347602_zh-CN.png)
+    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156817257347602_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -219,12 +219,12 @@
 
     -   如果需要进行不停机迁移，在迁移类型选择时勾选**结构迁移**、**全量数据迁移**和**增量数据迁移**。
  |
-    |迁移对象| 在迁移对象框中将想要迁移的数据库选中，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156808369340698_zh-CN.png)移动到已选择对象框。
+    |迁移对象| 在迁移对象框中将想要迁移的数据库选中，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156817257440698_zh-CN.png)移动到已选择对象框。
 
  **说明：** 
 
     -   迁移对象选择的粒度可以为库、表、列三个粒度。
-    -   默认情况下，迁移完成后，迁移对象名跟Amazon RDS for Oracle数据库一致。如果您需要迁移对象在目标RDS实例上名称不同，那么需要使用DTS提供的对象名映射功能。使用方法请参见[库表列映射](https://help.aliyun.com/document_detail/26628.html)。
+    -   默认情况下，迁移完成后，迁移对象名跟Amazon RDS for Oracle数据库一致。如果您需要迁移对象在目标RDS实例上名称不同，那么需要使用DTS提供的对象名映射功能。使用方法请参见[库表列映射](https://www.alibabacloud.com/help/zh/doc-detail/26628.htm)。
  |
 
 7.  单击页面右下角的**预检查并启动**。
@@ -232,7 +232,7 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156808369347468_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156817257447468_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
 8.  预检查通过后，单击**下一步**。
 9.  在购买配置确认页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 10. 单击**购买并启动**，迁移任务正式开始。
@@ -247,7 +247,7 @@
         1.  观察迁移任务的状态显示为**增量迁移无延迟**的状态时，将源库停写几分钟，此时迁移任务的状态可能会显示延迟的时间。
         2.  等待增量迁移再次进入**增量迁移无延迟**状态，手动停止迁移任务。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156808369347604_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156817257447604_zh-CN.png)
 
         3.  将业务切换至RDS实例。
 
