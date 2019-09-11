@@ -45,6 +45,8 @@
 |[ModifySynchronizationObject](https://help.aliyun.com/document_detail/49451.html)|修改同步对象|
 |[DescribeSynchronizationObjectModifyStatus](https://help.aliyun.com/document_detail/49452.html)|查询同步对象变更状态|
 |[DeleteSynchronizationJob](https://help.aliyun.com/document_detail/49450.html)|删除同步实例|
+|[SwitchSynchronizationEndpoint](cn.zh-CN//更改同步作业的数据库连接信息.md#)|更改同步作业的数据库连接信息|
+|[DescribeEndpointSwitchStatus](cn.zh-CN//查询更改数据库连接信息的任务执行状态.md#)|查询更改数据库连接信息的任务执行状态|
 
 ## 更多信息 {#section_mhq_5wq_d3b .section}
 
