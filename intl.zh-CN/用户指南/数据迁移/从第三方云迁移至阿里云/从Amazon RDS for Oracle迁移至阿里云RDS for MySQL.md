@@ -112,15 +112,15 @@
 2.  进入Amazon RDS for Oracle实例的基本信息页面。
 3.  在安全组规则区域框，单击入站规则对应的安全组名称。
 
-    ![安全组规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156817257341899_zh-CN.png)
+    ![安全组规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/150145/156826735341899_zh-CN.png)
 
-4.  在安全组设置页面，将对应区域的DTS服务器地址添加至入站规则中，IP地址段详情请参见[DTS IP地址段](https://help.aliyun.com/document_detail/84900.html)。
+4.  在安全组设置页面，将对应区域的DTS服务器地址添加至入站规则中，IP地址段详情请参见[迁移/同步/订阅本地数据库时需添加的IP白名单](intl.zh-CN/用户指南/准备工作（自建库）/迁移__同步__订阅本地数据库时需添加的IP白名单.md#)。
 
     **说明：** 
 
     -   您只需添加目标数据库所在区域对应的DTS IP地址段。本案例中，源数据库地区为新加坡，目标数据库地区为杭州，您只需要添加杭州地区的DTS IP地址段。
     -   在加入IP地址段时，您可以一次性添加所需的IP地址，无需逐条添加入站规则。
-    ![编辑AWS入站规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/287980/156817257347942_zh-CN.png)
+    ![编辑AWS入站规则](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/287980/156826735347942_zh-CN.png)
 
 5.  调整Amazon RDS for Oracle日志配置。如您不需要**增量数据迁移**可跳过本步骤。
     1.  使用Master User账号，通过SQL\*Plus工具连接Amazon RDS for Oracle数据库。
@@ -168,7 +168,7 @@
 3.  单击页面右上角的**创建迁移任务**。
 4.  配置迁移任务的**源库及目标库**信息。
 
-    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156817257347598_zh-CN.png)
+    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156826735347598_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -182,7 +182,7 @@
     |数据库类型|选择**Oracle**。|
     |主机名或IP地址|填入Amazon RDS for Oracle数据库的访问地址。 **说明：** 您可以在Amazon RDS for Oracle的基本信息页面，获取数据库的连接信息。
 
- ![连接地址](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/287980/156817257347946_zh-CN.png)
+ ![连接地址](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/287980/156826735347946_zh-CN.png)
 
 |
     |端口|填入Amazon RDS for Oracle数据库的服务端口，默认为**1521**。|
@@ -205,11 +205,11 @@
 
 5.  配置完成后，单击页面右下角的**授权白名单并进入下一步**。
 
-    **说明：** 此步骤会将DTS服务器的IP地址自动添加到目标RDS实例的白名单中，用于保障DTS服务器能够正常连接目标RDS实例。迁移完成后如不再需要可手动删除，详情请参见[设置白名单](https://help.aliyun.com/document_detail/43185.html)。
+    **说明：** 此步骤会将DTS服务器的IP地址自动添加到目标RDS实例的白名单中，用于保障DTS服务器能够正常连接目标RDS实例。
 
 6.  选择迁移对象及迁移类型。
 
-    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156817257347602_zh-CN.png)
+    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156826735347602_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -219,7 +219,7 @@
 
     -   如果需要进行不停机迁移，在迁移类型选择时勾选**结构迁移**、**全量数据迁移**和**增量数据迁移**。
  |
-    |迁移对象| 在迁移对象框中将想要迁移的数据库选中，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156817257440698_zh-CN.png)移动到已选择对象框。
+    |迁移对象| 在迁移对象框中将想要迁移的数据库选中，单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156826735340698_zh-CN.png)移动到已选择对象框。
 
  **说明：** 
 
@@ -232,7 +232,7 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156817257447468_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156826735447468_zh-CN.png)，查看具体的失败详情。根据失败原因修复后，重新进行预检查。
 8.  预检查通过后，单击**下一步**。
 9.  在购买配置确认页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 10. 单击**购买并启动**，迁移任务正式开始。
@@ -247,7 +247,7 @@
         1.  观察迁移任务的状态显示为**增量迁移无延迟**的状态时，将源库停写几分钟，此时迁移任务的状态可能会显示延迟的时间。
         2.  等待增量迁移再次进入**增量迁移无延迟**状态，手动停止迁移任务。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156817257447604_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156826735447604_zh-CN.png)
 
         3.  将业务切换至RDS实例。
 
