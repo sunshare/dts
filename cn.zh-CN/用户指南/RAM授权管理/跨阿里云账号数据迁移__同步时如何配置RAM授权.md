@@ -21,13 +21,13 @@
 
 在使用DTS进行数据迁移或者数据同步时，需要在源实例所属云账号中配置RAM授权，将目标实例所属云账号作为授信云账号，允许通过数据传输服务访问源实例所属云账号的相关云资源。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633244890_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156859729144890_zh-CN.png)
 
 ## 准备工作 {#section_4cd_6j9_mg7 .section}
 
 使用目标实例所属的云账号登录[账号管理](https://account.console.aliyun.com/#/secure)页面，获取云账号ID。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633244838_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156859729244838_zh-CN.png)
 
 ## 源实例所属云账号授权DTS访问 {#section_mfw_bgt_lhb .section}
 
@@ -40,11 +40,11 @@
 1.  使用源实例所属云账号登陆[数据传输服务DTS控制台](https://dts.console.aliyun.com/)。
 2.  在弹出的提示对话框中，单击**前往RAM角色授权**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633244835_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156859729244835_zh-CN.png)
 
 3.  在弹出的云资源访问授权对话框中，单击**同意授权**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633244836_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156859729244836_zh-CN.png)
 
 
 ## 将目标实例所属的云账号设置为授信云账号 {#section_rfj_z3t_lhb .section}
@@ -56,7 +56,7 @@
 3.  单击**新建RAM角色**，选择可信实体类型为**阿里云账号**，单击**下一步**。
 4.  在新建RAM角色对话框，配置RAM角色信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633344837_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156859729244837_zh-CN.png)
 
     |配置选项|配置说明|
     |:---|:---|
@@ -73,7 +73,7 @@
 6.  单击**精确授权**。
 7.  在添加权限对话框中选择权限类型为**系统策略**，并输入策略名称：**AliyunDTSRolePolicy**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156462633344840_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17089/156859729244840_zh-CN.png)
 
 8.  单击**确定**。
 9.  单击**完成**。
@@ -89,10 +89,10 @@
                 "Effect": "Allow",
                 "Principal": {
                     "RAM": [
-                        "acs:ram::<云账号ID>:root"
+                        "acs:ram::<目标实例所属的云账号ID>:root"
                     ],
                     "Service": [
-                        "<云账号ID>@dts.aliyuncs.com"
+                        "<目标实例所属的云账号ID>@dts.aliyuncs.com"
                     ]
                 }
             }
