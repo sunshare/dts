@@ -74,80 +74,12 @@
 
 **数据库账号创建及授权方法：**
 
--   自建MySQL数据库请参见[数据迁移前准备工作](#section_xzp_eb2_x9q)。
+-   自建MySQL数据库请参见[\#section\_xzp\_eb2\_x9q](#section_xzp_eb2_x9q)。
 -   RDS for MySQL实例请参见[创建账号](https://help.aliyun.com/document_detail/96089.html)和[修改账号权限](https://help.aliyun.com/document_detail/96101.html)。
 
-## 数据迁移前准备工作 {#section_xzp_eb2_x9q .section}
+## 准备工作 {#section_lt6_vuu_iou .section}
 
-在正式配置数据迁移任务之前，需要在自建MySQL数据库上进行账号与Binlog的配置。
-
-1.  在自建MySQL数据库中创建用于数据迁移的账号。
-
-    ``` {#codeblock_0fp_jze_mw5}
-    CREATE USER 'username'@'host' IDENTIFIED BY 'password';
-    ```
-
-    参数说明：
-
-    -   username：要创建的账号名称。
-    -   host：指定该账号登录数据库的主机。如果是本地用户可以使用localhost，如需该用户从任意主机登录，可以使用百分号（%）。
-    -   password：该账号的登录密码。
-    例如，创建账号为dtsmigration，密码为Dts123456的账号从任意主机登录本地数据库，命令如下。
-
-    ``` {#codeblock_7xp_luo_gw6}
-    CREATE USER 'dtsmigration'@'%' IDENTIFIED BY 'Dts123456';
-    ```
-
-    **说明：** 更多信息请参见[CREATE USER](https://dev.mysql.com/doc/refman/5.7/en/create-user.html)语法说明。
-
-2.  给用于数据迁移的数据库账号进行授权操作。
-
-    ``` {#codeblock_n5m_iyq_3sv}
-    GRANT privileges ON databasename.tablename TO 'username'@'host' WITH GRANT OPTION;
-    ```
-
-    参数说明：
-
-    -   privileges：该账号的操作权限，如SELECT、INSERT、UPDATE等。如果要授权该账号所有权限，则使用ALL。
-    -   databasename：数据库名。如果要授权该账号所有的数据库权限，则使用星号（\*）。
-    -   tablename：表名。如果要授权该账号所有的表权限，则使用星号（\*）。
-    -   username：要授权的账号名。
-    -   host：授权登录数据库的主机名。如果是本地用户可以使用localhost，如果想让该用户从任意主机登录，可以使用百分号（%）。
-    -   WITH GRANT OPTION：授权该账号使用GRANT命令，该参数为可选。
-    例如，授权账号dtsmigration对所有数据库和表的所有权限，并可以从任意主机登录本地数据库，命令如下。
-
-    ``` {#codeblock_kh1_8yb_5ow}
-    GRANT ALL ON *.* TO 'dtsmigration'@'%';
-    ```
-
-    **说明：** 更多信息请参见[GRANT](https://dev.mysql.com/doc/refman/5.7/en/grant.html?spm=a2c4g.11186623.2.20.42f069a7RdYBer)语法说明。
-
-3.  开启自建的MySQL数据库的binlog，如您不需要**增量数据迁移**可跳过本步骤。
-
-    **说明：** 您可以使用如下命令查询数据库是否开启了binlog。如果查询结果为 log\_bin=ON，那么数据库已开启binlog，您可以跳过本步骤。
-
-    ``` {#codeblock_t5z_znj_c6m}
-    show global variables like "log_bin";
-    ```
-
-    1.  修改配置文件my.cnf中的如下参数。
-
-        ``` {#codeblock_nts_hmz_xvb}
-        log_bin=mysql_bin
-        binlog_for Mat=row
-        server_id=2 //大于1的整数。
-        binlog_row_image=full //当本地 MySQL 版本大于 5.6 时，则需设置该项。
-        ```
-
-    2.  修改完成后，重启MySQL进程。
-
-        ``` {#codeblock_ddy_t01_5b6}
-        $mysql_dir/bin/mysqladmin -u root -p shutdown
-        $mysql_dir/bin/safe_mysqld &
-        ```
-
-        **说明：** 将`mysql_dir`替换为您MySQL实际的安装目录。
-
+ [为自建MySQL创建账号并设置binlog](cn.zh-CN/用户指南/准备工作（自建库）/为自建MySQL创建账号并设置binlog.md#)
 
 ## 操作步骤 {#section_sff_dcr_5hb .section}
 
@@ -155,12 +87,12 @@
 2.  在左侧导航栏，单击**数据迁移**。
 3.  在迁移任务列表页面顶部，选择迁移的目标实例所属地域。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156523475550439_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156861149550439_zh-CN.png)
 
 4.  单击页面右上角的**创建迁移任务**。
 5.  配置迁移任务的源库及目标库信息。
 
-    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17105/156523475547746_zh-CN.png)
+    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17105/156861149547746_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
@@ -195,7 +127,7 @@
 
 7.  选择迁移对象及迁移类型。
 
-    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17105/156523475547745_zh-CN.png)
+    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17105/156861149547745_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -205,7 +137,7 @@
 
     -   如果需要进行不停机迁移，则同时勾选**结构迁移**、**全量数据迁移**和**增量数据迁移**。
  |
-    |迁移对象| 在迁移对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156523475640698_zh-CN.png)将其移动至已选择对象框。
+    |迁移对象| 在迁移对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156861149540698_zh-CN.png)将其移动至已选择对象框。
 
  **说明：** 
 
@@ -219,7 +151,7 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156523475647468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156861149547468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
 9.  预检查通过后，单击**下一步**。
 10. 在购买配置确认页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 11. 单击**购买并启动**，迁移任务正式开始。
@@ -236,7 +168,7 @@
         1.  观察迁移任务的进度变更为**增量迁移**，并显示为**无延迟**状态时，将源库停写几分钟，此时**增量迁移**的状态可能会显示延迟的时间。
         2.  等待迁移任务的**增量迁移**再次进入**无延迟**状态后，手动结束迁移任务。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156523475647604_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156861149547604_zh-CN.png)
 
 12. 将业务切换至RDS实例。
 
