@@ -45,8 +45,19 @@
 |[ModifySynchronizationObject](https://help.aliyun.com/document_detail/49451.html)|修改同步对象|
 |[DescribeSynchronizationObjectModifyStatus](https://help.aliyun.com/document_detail/49452.html)|查询同步对象变更状态|
 |[DeleteSynchronizationJob](https://help.aliyun.com/document_detail/49450.html)|删除同步实例|
-|[SwitchSynchronizationEndpoint](cn.zh-CN//更改同步作业的数据库连接信息.md#)|更改同步作业的数据库连接信息|
-|[DescribeEndpointSwitchStatus](cn.zh-CN//查询更改数据库连接信息的任务执行状态.md#)|查询更改数据库连接信息的任务执行状态|
+|[SwitchSynchronizationEndpoint](cn.zh-CN/API概览/数据同步/更改同步作业的数据库连接信息.md#)|更改同步作业的数据库连接信息|
+|[DescribeEndpointSwitchStatus](cn.zh-CN/API概览/数据同步/查询更改数据库连接信息的任务执行状态.md#)|查询更改数据库连接信息的任务执行状态|
+
+## 监控报警 {#section_qq1_yeh_npl .section}
+
+|API|描述|
+|---|--|
+|[ConfigureMigrationJobAlert](cn.zh-CN/API概览/监控报警/配置迁移任务的监控报警.md#)|配置迁移任务的监控报警|
+|[DescribeMigrationJobAlert](cn.zh-CN/API概览/监控报警/查询迁移任务的监控报警设置.md#)|查询迁移任务的监控报警设置|
+|[ConfigureSubscriptionInstanceAlert](cn.zh-CN/API概览/监控报警/配置订阅通道的监控报警.md#)|配置订阅通道的监控报警|
+|[DescribeSubscriptionInstanceAlert](cn.zh-CN/API概览/监控报警/查询订阅通道的监控报警设置.md#)|查询订阅通道的监控报警设置|
+|[ConfigureSynchronizationJobAlert](cn.zh-CN/API概览/监控报警/配置同步作业的监控报警.md#)|配置同步作业的监控报警|
+|[DescribeSubscriptionInstanceAlert](cn.zh-CN/API概览/监控报警/查询同步作业的监控报警设置.md#)|查询同步作业的监控报警设置|
 
 ## 更多信息 {#section_mhq_5wq_d3b .section}
 
