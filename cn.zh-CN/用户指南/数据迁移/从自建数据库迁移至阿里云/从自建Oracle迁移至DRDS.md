@@ -14,7 +14,7 @@
 
 ## 前提条件 {#section_97x_2gt_pl0 .section}
 
--   自建Oracle数据库的版本为10g、11g或12c版本。
+-   自建Oracle数据库的版本为9i、10g或11g版本。
 -   自建Oracle数据库已开启Supplemental Logging，且要求supplemental\_log\_data\_pk，supplemental\_log\_data\_ui已开启，详情请参见[Supplemental Logging](https://docs.oracle.com/database/121/SUTIL/GUID-D857AF96-AC24-4CA1-B620-8EA3DF30D72E.htm#SUTIL1582)。
 -   自建Oracle数据库已开启ARCHIVELOG（归档模式），设置合理的归档日志保持周期且归档日志能够被访问，详情请参见[ARCHIVELOG](https://docs.oracle.com/database/121/ADMIN/archredo.htm#ADMIN008)。
 -   DRDS实例中用于创建数据库的RDS实例的存储空间须大于自建Oracle数据库占用的存储空间。
@@ -33,8 +33,8 @@
 
 |迁移类型|链路配置费用|公网流量费用|
 |----|------|------|
-|全量数据迁移|不收取|不收取|
-|增量数据迁移|收取，费用详情请参见[产品定价](../../../../cn.zh-CN/产品定价/产品定价.md#)。|不收取|
+|结构迁移/全量数据迁移|不收取|通过公网进行数据迁移时收取，详情请参见[产品定价](../../../../cn.zh-CN/产品定价/产品定价.md#)。|
+|增量数据迁移|收取，详情请参见[产品定价](../../../../cn.zh-CN/产品定价/产品定价.md#)。|
 
 ## 迁移类型说明 {#section_nco_yvv_nzk .section}
 
@@ -58,14 +58,14 @@
 |自建Oracle数据库|schema的owner权限|SYSDBA|
 |DRDS实例|待迁入数据库的写权限|待迁入数据库的写权限|
 
-**数据库账号创建及授权方法：**
+数据库账号创建及授权方法：
 
 -   自建Oracle数据库请参见[CREATE USER](https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_8003.htm)和[GRANT](https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_9013.htm)。
 -   DRDS实例请参见[账号管理](https://help.aliyun.com/document_detail/98664.html)。
 
 ## 准备工作 {#section_swj_kfm_p0p .section}
 
-根据自建Oracle数据库中待迁移数据表的数据结构，在目标DRDS实例中创建相应的数据库和数据表，详情请参见[创建数据库](https://help.aliyun.com/document_detail/52090.html)和[SQL基本操作](https://help.aliyun.com/document_detail/117763.html)。
+根据自建Oracle数据库中待迁移数据表的数据结构，在目标DRDS实例中创建相应的数据库和数据表，详情请参见[创建数据库](https://help.aliyun.com/document_detail/52090.html)和[SQL基本操作](https://help.aliyun.com/document_detail/117763.html)[SQL基本操作](https://help.aliyun.com/document_detail/117763.html)。
 
 **说明：** 由于Oracle和DRDS实例的数据类型并不是一一对应的，您需要在DRDS实例中定义对应的数据类型，详情请参见[异构数据库间的数据类型映射关系](cn.zh-CN/用户指南/数据迁移/异构数据库间的数据类型映射关系.md#)。
 
@@ -75,20 +75,18 @@
 2.  在左侧导航栏，单击**数据迁移**。
 3.  在迁移任务列表页面顶部，选择迁移的目标实例所属地域。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156653902350439_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/711733/156896868250439_zh-CN.png)
 
 4.  单击页面右上角的**创建迁移任务**。
 5.  配置迁移任务的源库及目标库信息。
 
-    ![源库和目标库连接配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17108/156653902447826_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17108/156896868261749_zh-CN.png)
 
     |类别|配置|说明|
     |:-|:-|:-|
-    |任务名称|-|     -   DTS为每个任务自动生成一个任务名称，任务名称没有唯一性要求。
-    -   您可以修改任务名称，建议为任务配置具有业务意义的名称，便于后续的任务识别。
- |
+    |任务名称|-|DTS会自动生成一个任务名称，建议配置具有业务意义的名称（无唯一性要求），便于后续识别。|
     |源库信息|实例类型|选择**有公网IP的自建数据库**。|
-    |实例地区|当实例类型选择为**有公网IP的自建数据库**时，**实例地区**无需设置。 **说明：** 如果您的自建Oracle数据库进行了白名单安全设置，您需要在**实例地区**配置项后，单击**获取DTS IP段**来获取到DTS服务器的IP地址，并将获取到的IP地址加入自建Oracle数据库的白名单安全设置中。
+    |实例地区|当实例类型选择为**有公网IP的自建数据库**时，**实例地区**无需设置。 **说明：** 如果您的自建Oracle数据库具备白名单安全设置，您需要在**实例地区**配置项后，单击**获取DTS IP段**来获取到DTS服务器的IP地址，并将获取到的IP地址加入自建Oracle数据库的白名单安全设置中。
 
  |
     |数据库类型|选择**Oracle**。|
@@ -97,15 +95,15 @@
     |实例类型|     -   **非RAC实例**：选择该项后，您还需要填写**SID**信息。
     -   **RAC实例**：选择该项后，您还需要填写**ServiceName**信息。
  |
-    |数据库账号|填入自建Oracle数据库的连接账号，权限要求请参见[迁移账号权限要求](#section_bjn_5zq_5hb)。|
-    |数据库密码|填入自建Oracle数据库账号对应的密码。 **说明：** 源库信息填写完毕后，您可以单击**数据库密码**后的**测试连接**来验证填入的源库信息是否正确。源库信息填写正确则提示**测试通过**，如提示**测试失败**，单击**测试失败**后的**诊断**，根据提示调整填写的源库信息。
+    |数据库账号|填入自建Oracle的数据库账号，权限要求请参见[迁移账号权限要求](#section_bjn_5zq_5hb)。|
+    |数据库密码|填入该数据库账号对应的密码。 **说明：** 源库信息填写完毕后，您可以单击**数据库密码**后的**测试连接**来验证填入的源库信息是否正确。源库信息填写正确则提示**测试通过**，如提示**测试失败**，单击**测试失败**后的**诊断**，根据提示调整填写的源库信息。
 
  |
     |目标库信息|实例类型|选择**DRDS实例**。|
     |实例地区|选择目标DRDS实例所属地域。|
     |DRDS实例ID|选择目标DRDS实例ID。|
-    |数据库账号|填入连接目标DRDS实例数据库的账号，权限要求请参见[迁移账号权限要求](#section_bjn_5zq_5hb)。|
-    |数据库密码|填入连接目标DRDS实例数据库账号对应的密码。 **说明：** 目标库信息填写完毕后，您可以单击**数据库密码**后的**测试连接**来验证填入的目标库信息是否正确。目标库信息填写正确则提示**测试通过**，如提示**测试失败**，单击**测试失败**后的**诊断**，根据提示调整填写的目标库信息。
+    |数据库账号|填入目标DRDS实例的数据库账号，权限要求请参见[迁移账号权限要求](#section_bjn_5zq_5hb)。|
+    |数据库密码|填入该数据库账号对应的密码。 **说明：** 目标库信息填写完毕后，您可以单击**数据库密码**后的**测试连接**来验证填入的目标库信息是否正确。目标库信息填写正确则提示**测试通过**，如提示**测试失败**，单击**测试失败**后的**诊断**，根据提示调整填写的目标库信息。
 
  |
 
@@ -115,7 +113,7 @@
 
 7.  选择迁移对象及迁移类型。
 
-    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653902547602_zh-CN.png)
+    ![选择迁移类型和迁移对象](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156896868247602_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -125,12 +123,12 @@
 
     -   如果需要进行不停机迁移，则同时勾选**全量数据迁移**和**增量数据迁移**。
  |
-    |迁移对象| 在迁移对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156653902640698_zh-CN.png)将其移动至已选择对象框。
+    |迁移对象| 在迁移对象框中单击待迁移的对象，然后单击![向右小箭头](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/79929/156896868240698_zh-CN.png)将其移动至已选择对象框。
 
  **说明：** 
 
     -   迁移对象选择的粒度可以为库、表、列三个粒度。
-    -   默认情况下，迁移完成后，迁移对象名跟自建Oracle数据库一致。如果您需要迁移对象在目标RDS实例上名称不同，那么需要使用DTS提供的对象名映射功能。使用方法请参见[库表列映射](https://help.aliyun.com/document_detail/26628.html)。
+    -   默认情况下，迁移完成后，迁移对象名跟自建Oracle数据库一致。如果您需要迁移对象在目标RDS实例上名称不同，那么需要使用DTS提供的对象名映射功能。使用方法请参见[库表列映射](cn.zh-CN/用户指南/数据迁移/库表列映射.md#)。
     -   如果使用了对象名映射功能，可能会导致依赖这个对象的其他对象迁移失败。
  |
 
@@ -139,7 +137,7 @@
     **说明：** 
 
     -   在迁移任务正式启动之前，会先进行预检查。只有预检查通过后，才能成功启动迁移任务。
-    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156653902647468_zh-CN.png)，查看失败详情。根据失败原因修复后，重新进行预检查。
+    -   如果预检查失败，单击具体检查项后的![提示](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17095/156896868247468_zh-CN.png)，查看失败详情。根据提示修复后，重新进行预检查。
 9.  预检查通过后，单击**下一步**。
 10. 在购买配置确认页面，选择**链路规格**并勾选**数据传输（按量付费）服务条款**。
 11. 单击**购买并启动**，迁移任务正式开始。
@@ -156,7 +154,7 @@
         1.  观察迁移任务的进度变更为**增量迁移**，并显示为**无延迟**状态时，将源库停写几分钟，此时**增量迁移**的状态可能会显示延迟的时间。
         2.  等待迁移任务的**增量迁移**再次进入**无延迟**状态后，手动结束迁移任务。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156653902647604_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17104/156896868247604_zh-CN.png)
 
 12. 将业务切换至DRDS实例。
 
