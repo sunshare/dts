@@ -2,7 +2,7 @@
 
 在使用DTS执行PostgreSQL数据库间的数据迁移前，可通过本文介绍的方法在源库创建触发器和函数获取源库的DDL信息，然后再由DTS执行数据迁移，在增量数据迁移阶段即可实现DDL操作的增量迁移。
 
-PostgreSQL数据库需为9.4及以上版本。
+源库需为9.4及以上版本的自建PostgreSQL数据库。
 
 通过DTS执行PostgreSQL数据库间的数据迁移时，在增量数据迁移阶段，DTS仅支持DML操作（INSERT、DELETE、UPDATE）的同步，不支持DDL操作的同步。
 
@@ -39,7 +39,7 @@ PostgreSQL数据库需为9.4及以上版本。
        event_time timestamp with time zone,
        txid_current character varying(128) COLLATE pg_catalog."default",
        message text COLLATE pg_catalog."default"
-    )
+    );
     ```
 
 4.  执行下述命令创建捕获DDL信息的函数。
@@ -91,12 +91,6 @@ PostgreSQL数据库需为9.4及以上版本。
       end if;
     end
     $BODY$;
-    
-    ALTER FUNCTION public.dts_capture_ddl()
-        OWNER TO postgres;
-    
-    CREATE EVENT TRIGGER dts_intercept_ddl ON ddl_command_end
-    EXECUTE PROCEDURE public.dts_capture_ddl();
     ```
 
 5.  将刚创建的函数的所有者修改为postgres。
@@ -118,6 +112,4 @@ PostgreSQL数据库需为9.4及以上版本。
 
 -   [从自建PostgreSQL（9.4-10.0版本）增量迁移至RDS PostgreSQL](/cn.zh-CN/数据迁移/从自建数据库迁移至阿里云/源库为PostgreSQL/从自建PostgreSQL（9.4-10.0版本）增量迁移至RDS PostgreSQL.md)
 -   [从自建PostgreSQL（10.1-12版本）增量迁移至RDS PostgreSQL](/cn.zh-CN/数据迁移/从自建数据库迁移至阿里云/源库为PostgreSQL/从自建PostgreSQL（10.1-12版本）增量迁移至RDS PostgreSQL.md)
-
-**说明：** RDS PostgreSQL间迁移的配置方法类似。
 
