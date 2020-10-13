@@ -77,7 +77,7 @@ Kafka是应用较为广泛的分布式、高吞吐量、高可扩展性消息队
     |配置|说明|
     |--|--|
     |**同步到Kafka Partition策略**|根据业务需求选择同步的策略，详细介绍请参见[Kafka Partition同步策略说明](/cn.zh-CN/数据同步/同步作业管理/Kafka Partition同步策略说明.md)。|
-    |同步对象|在**源库对象**区域框中，选择需要同步的对象（选择的粒度为表），然后单击![向右箭头](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/8502659951/p40698.png)图标将其移动到**已选对象**区域框中。**说明：** DTS会自动将表名映射为配置同步的源和目标实例信息时选择的Topic名称。如果需要更换同步的目标Topic，请参见步骤9 。 |
+    |同步对象|在**源库对象**区域框中，选择需要同步的对象（选择的粒度为表），然后单击![向右箭头](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/8502659951/p40698.png)图标将其移动到**已选对象**区域框中。**说明：** DTS会自动将表名映射为[步骤6](#step_2ys_eus_xmy)选择的Topic名称。如果需要更换同步的目标Topic，请参见步骤9 。 |
 
 9.  在**已选择对象**区域框中，将鼠标指针放置在目标Topic名上，然后单击Topic名后出现的**编辑**，在弹出的对话框中设置源表在目标Kafka集群中的Topic名称、Topic的Partition数量、Partition Key等信息。
 
