@@ -45,11 +45,6 @@ INSERT、UPDATE、DELETE。
 -   1对1单向同步。
 -   多对1单向同步。
 
-## 支持的同步架构
-
--   1对1单向同步。
--   多对1单向同步。
-
 ## 准备工作
 
 由于PolarDB MySQL同步至PolarDB-X暂不支持**结构初始化**，所以您需要根据源PloarDB MySQL集群中待同步对象的数据结构，在目标实例中创建相应的数据库和数据表，详情请参见[创建数据库](https://help.aliyun.com/document_detail/52090.html)和[SQL基本操作](https://help.aliyun.com/document_detail/117763.html)。
